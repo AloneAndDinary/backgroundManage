@@ -18,51 +18,51 @@
 </template>
 
 <script>
-  export default {
-    name: "tableComponent",
-    props: {
-      tableData: {
-        type: Array,
-        default: () => {
-          return []
-        }
-      },
-      columnData: {
-        type: Array,
-        default: () => {
-          return []
-        }
-      },
-      showCheckbox: {
-        type: Boolean,
-        default: false
-      },
-      refName: {
-        type: String,
-        default: 'table'
-      },
-      showBtn: {
-        type: Boolean,
-        default: false
-      },
-      btnList: {
-        type: Object,
-        default: () => {
-          return {}
-        }
+export default {
+  name: "tableComponent",
+  props: {
+    tableData: {
+      type: Array,
+      default: () => {
+        return [];
       }
     },
-    data() {
-      return {
-        btnClick(type,data) {
-          this.$emit('btnClickEvent',{type,data})
-        }
+    columnData: {
+      type: Array,
+      default: () => {
+        return [];
       }
     },
-    methods: {
-
+    showCheckbox: {
+      type: Boolean,
+      default: false
+    },
+    refName: {
+      type: String,
+      default: 'table'
+    },
+    showBtn: {
+      type: Boolean,
+      default: false
+    },
+    btnList: {
+      type: Object,
+      default: () => {
+        return {};
+      }
     }
+  },
+  data() {
+    return {
+      btnClick(type,data) {
+        this.$emit('btnClickEvent',{type,data});
+      }
+    };
+  },
+  methods: {
+
   }
+};
 </script>
 
 <style scoped>

@@ -1,33 +1,37 @@
 <template>
-    <div>
-      <tableComponent
-        :tableData="tableData"
-        :columnData="columnData"
-        :showCheckbox="showCheckbox"
-        :refName="refName"
-        :showBtn="showBtn"
-        :btnList="btnList"
-        @btnClickEvent="btnClickEvent"/>
-      <pageComponent
-        :total="total"
-        :pageSize.sync="pageSize"
-        :currentPage.sync="currentPage"
-        :layout="layout"
-        :showBackground="showBackground"
-        @handleSizeChange="handleSizeChange"
-        @handleCurrentChange="handleCurrentChange"/>
-    </div>
+  <div class="container">
+    <ControlBtn :control-btn="controlBtn" :searchItemList="searchItemList"></ControlBtn>
+    <TableComponent
+      :tableData="tableData"
+      :columnData="columnData"
+      :showCheckbox="showCheckbox"
+      :refName="refName"
+      :showBtn="showBtn"
+      :btnList="btnList"
+      @btnClickEvent="btnClickEvent"/>
+    <Pagination
+      :total="total"
+      :pageSize.sync="pageSize"
+      :currentPage.sync="currentPage"
+      :layout="layout"
+      :showBackground="showBackground"
+      @handleSizeChange="handleSizeChange"
+      @handleCurrentChange="handleCurrentChange"/>
+  </div>
 </template>
 
 <script>
-import { funList } from '../../../../Desktop/publicFun';
-import tableComponent from '../../../../Desktop/tableComponent';
-import pageComponent from '../../../../Desktop/pageComponent';
+import TableComponent from '@/components/tableComponent.vue';
+import Pagination from '@/components/pagination.vue';
+import ControlBtn from '@/components/controlBtn.vue';
+import { request } from '@/network/require';
+import { funList } from '@/util/publicFun';
 export default {
-  name: "testPage",
-  components: {
-    tableComponent,
-    pageComponent
+  name: "menuMenage",
+  components:{
+    TableComponent,
+    Pagination,
+    ControlBtn
   },
   data() {
     return {
@@ -91,19 +95,59 @@ export default {
         ]
       },
       showCheckbox: false,
-      refName: ''
+      refName: '',
+      controlBtn: [
+        {
+          name: '新增',
+          type: 'primary',
+          size: 'normal',
+          position: 'left'
+        }
+      ],
+      searchItemList:[
+        {
+          type: 'input',
+          placeholder: '请输入姓名',
+          title: '姓名姓名姓名姓名姓名姓名',
+          value: ''
+        },
+        {
+          type:'select',
+          placeholder: '请选择类型',
+          title: '类型',
+          value: '',
+          options: [
+            {
+              label: '全部',
+              value: ''
+            },
+            {
+              label: '单选',
+              value: '1'
+            },
+            {
+              label: '复选',
+              value: '2'
+            }
+          ]
+        }
+      ]
     };
-  },
-  mounted() {
-    this.getTableData();
   },
   methods: {
     // 获取表格数据
     getTableData() {
-      const sendData = {
-        page: this.currentPage,
-        size: this.pageSize
+      let sendData = {
+        method: 'get',
+        url: '/api/register',
+        data: {
+          page: this.currentPage,
+          size: this.pageSize
+        }
       };
+      request(sendData).then(res => {
+        console.log(res);
+      });
       console.log('获取表格数据', sendData);
     },
     // 按钮点击事件合集
@@ -146,6 +190,6 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  @import "../../css/pageCommon";
 </style>

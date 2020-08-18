@@ -33,6 +33,37 @@ const baseRoutes = [
     ]
   },
   {
+    path: '/powerManage',
+    name: 'powerManage',
+    otherName: '权限管理',
+    component: Layout,
+    meta: {canLogin: false},
+    redirect: '/powerManage/menuManage',
+    children: [
+      {
+        path: '/powerManage/menuManage',
+        name: 'menuManage',
+        otherName: '菜单管理',
+        component: () => import('../views/powerManage/menuManage.vue'),
+        meta: {canLogin: false}
+      },
+      {
+        path: '/powerManage/roleManage',
+        name: 'roleManage',
+        otherName: '角色管理',
+        component: () => import('../views/powerManage/roleManage.vue'),
+        meta: {canLogin: false}
+      },
+      {
+        path: '/powerManage/powerManage',
+        name: 'powerManage',
+        otherName: '权限管理',
+        component: () => import('../views/powerManage/powerManage.vue'),
+        meta: {canLogin: false}
+      }
+    ]
+  },
+  {
     path: '/test11',
     name: 'test11',
     otherName: '测试页面11',
@@ -57,13 +88,6 @@ const baseRoutes = [
     meta: {canLogin: false},
     redirect: '/test/test1',
     children: [
-      {
-        path: '/test/test1',
-        otherName: '测试页面1-1',
-        name: 'welcomeIndex',
-        component: () => import('../views/test/test11.vue'),
-        meta: {canLogin: true}
-      },
       {
         path: '/test/test2',
         name: 'welcomeIndex',

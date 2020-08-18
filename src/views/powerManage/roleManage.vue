@@ -1,12 +1,10 @@
 <template>
-    <div>
-        404页面
-    </div>
+  <div>角色管理</div>
 </template>
 
 <script>
 export default {
-  name: "page"
+  name: "roleMamge"
 };
 </script>
 

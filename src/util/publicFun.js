@@ -6,7 +6,7 @@ export const funList = {
       type: type,
       message: message,
       duration: 1000
-    })
+    });
   },
   confirmDialog(confirm, message) {
     Vue.prototype.$confirm(message, '提示', {

@@ -1,0 +1,44 @@
+@import "./framework";
+@padding: 20px;
+@breadcrumbWidth:calc(100% - 40px);
+@containerHeight:calc(@mainHeight - @breadcrumbHeight - 40px - @padding * 2 - @containerMargin);
+@containerMargin: 10px;
+
+@searchHeight: 28px;
+
+.container{
+  width: @breadcrumbWidth;
+  height: @containerHeight;
+  padding: @padding;
+  overflow: auto;
+  background: #fff;
+  margin-top: @containerMargin;
+}
+.controlBtn{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+.searchList{
+  >div{
+    float: left;
+    height: @searchHeight;
+    line-height: @searchHeight;
+    /deep/ .el-input__inner{
+      height: @searchHeight;
+      line-height: @searchHeight;
+    }
+  }
+  /deep/ .el-input{
+    width: 200px;
+  }
+  /deep/ .el-input__icon{
+    line-height: @searchHeight;
+  }
+  .title{
+    font-size: 14px;
+    text-align: left;
+    //margin-right: 10px;
+    margin:0px 10px;
+  }
+}

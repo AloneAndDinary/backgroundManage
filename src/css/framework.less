@@ -7,6 +7,8 @@
 @asideWidth: 240px;
 @asideHeight: calc(100vh - @headerHeight);
 
+@mainHeight: calc(100vh - @headerHeight);
+
 @menuPadding: 30px;
 @submenuPadding: 40px;
 @menuTextAlign: left;
@@ -18,7 +20,7 @@
 @titleFontSize: 24px;
 @titleColor: #ddd;
 
-@breadcrumbWidth: 100%;
+@breadcrumbWidth: calc(100% - 20px);
 @breadcrumbHeight: 40px;
 @breadcrumbBackgroundColor: #fff;
 @breadcrumbFontSize: 14px;
@@ -52,6 +54,10 @@
   background-color: @mainBgColor;
   color: @fontColor;
   text-align: center;
+  height: @mainHeight;
+}
+#mainContent{
+  overflow: hidden;
 }
 
 body > .el-container {
