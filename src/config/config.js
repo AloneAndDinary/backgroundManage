@@ -10,5 +10,7 @@ export const defaultSetting = {
   // 是否需要多级菜单
   showLevelMenu: true,
   // 是否需要面包屑导航
-  showBreadcrumb: true
+  showBreadcrumb: true,
+  // 表格是否开启点击行事件
+  tableColClick: false
 };

@@ -17,8 +17,21 @@
             :value="option.value">
           </el-option>
         </el-select>
+        <el-date-picker
+          v-if="item.type === 'time'"
+          v-model="item.value"
+          type="date"
+          value-format="yyyy-MM-dd"
+          :key="index"
+          :placeholder="item.placeholder">
+        </el-date-picker>
+        <el-cascader
+          v-if="item.type === 'cascader'"
+          v-model="item.value"
+          :options="item.options"
+          :key="index"></el-cascader>
       </template>
-      <el-button type="success" size="mini" @click="search">搜索</el-button>
+      <el-button type="success" size="mini" @click="search" class="searchBtn">搜索</el-button>
     </div>
   </div>
 </template>
@@ -49,5 +62,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-  @import "../css/pageCommon";
+  @import "../../css/pageCommon";
 </style>

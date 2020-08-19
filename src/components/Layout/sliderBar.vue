@@ -1,6 +1,6 @@
 <template>
     <div id="sliderBar">
-        <el-menu class="el-menu-vertical-demo">
+        <el-menu class="el-menu-vertical-demo" :collapse="isCollapse">
             <template v-for="(router, index) in routerList">
                 <el-submenu v-if="router.children" :index="String(index)" :key="index">
                     <template slot="title">
@@ -25,6 +25,7 @@ export default {
   name: "sliderBar",
   data() {
     return {
+      isCollapse: false,
       routerList: [
         {
           path: '/welcome',
