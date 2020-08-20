@@ -1,16 +1,14 @@
 const Mock = require('mockjs');
-const Random = Mock.Random;
-Mock.mock('/api/register', 'get', () => {
-  let articles = [];
-  for(let i=0;i<10;i++) {
-    let newArticleObject = {
-      title: Random.csentence(5,30),
-      thumbnail_pic_s:Random.image('150x100','#894fc4','#fff','png','mock'),
-      author_name:Random.cname(),
-      date: Random.date() + ' ' +Random.time()
-    };
-    articles.push(newArticleObject);
+// const Random = Mock.Random;
+Mock.mock('/powerManage/menuList', 'get', () => {
+  let systemList = [];
+  let date = new Date();
+  for(let i=0;i<5;i++) {
+    systemList.push({
+      systemName: `系统${i}`,
+      updateTime: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
+      visitAddress: `/cms`
+    });
   }
-  console.log(articles);
-  return articles;
+  return systemList;
 });

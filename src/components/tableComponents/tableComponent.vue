@@ -4,6 +4,11 @@
         :ref="refName"
         :data="tableData"
         style="width: 100%">
+        <el-table-column type="expand" v-if="isExpandTable">
+          <template>
+            <slot name="expandContent"></slot>
+          </template>
+        </el-table-column>
         <el-table-column v-if="showCheckbox" type="selection" width="55"></el-table-column>
         <el-table-column v-for="(item,index) in columnData" :key="index" :prop="item.propName" :label="item.label"></el-table-column>
         <template v-if="showBtn">
@@ -34,6 +39,10 @@ export default {
       }
     },
     showCheckbox: {
+      type: Boolean,
+      default: false
+    },
+    isExpandTable: {
       type: Boolean,
       default: false
     },

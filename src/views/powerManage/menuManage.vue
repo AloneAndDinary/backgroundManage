@@ -1,14 +1,24 @@
 <template>
   <div class="container">
-    <ControlBtn :control-btn="controlBtn" :searchItemList="searchItemList" @search="search"></ControlBtn>
+    <ControlBtn :showSearchBtn="showSearchBtn" :control-btn="controlBtn" :searchItemList="searchItemList" @search="search"></ControlBtn>
     <TableComponent
+      :isExpandTable="isExpandTable"
       :tableData="tableData"
       :columnData="columnData"
       :showCheckbox="showCheckbox"
       :refName="refName"
       :showBtn="showBtn"
       :btnList="btnList"
-      @btnClickEvent="btnClickEvent"/>
+      @btnClickEvent="btnClickEvent">
+      <template slot='expandContent'>
+        <div class="menuList">
+          <el-collapse v-model="activeName" accordion>
+            <el-collapse-item :title="item.name" :name="i" v-for="(item,i) in systemList" :key="i">
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+      </template>
+    </TableComponent>
     <Pagination
       :total="total"
       :pageSize.sync="pageSize"
@@ -35,48 +45,51 @@ export default {
   },
   data() {
     return {
+      activeName:'',
       total: 100,
       pageSize: 10,
       currentPage: 1,
       layout: `total,sizes,prev,pager,next,jumper`,
       showBackground: true,
+      isExpandTable: true,
       tableData: [
         {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
+          date: '系统1',
+          name: '2020-8-1',
+          address: '/cms'
         }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
+          date: '系统2',
+          name: '2020-8-4',
+          address: '/workbench'
         }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
+          date: '系统3',
+          name: '2020-8-1',
+          address: '/platform'
         }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
+          date: '系统4',
+          name: '2020-9-2',
+          address: '/test'
         }
       ],
       columnData: [
         {
           propName: 'date',
-          label: '日期',
+          label: '系统名称',
           showActionBar: false
         },
         {
           propName: 'name',
-          label: '姓名',
+          label: '更新时间',
           showActionBar: false
         },
         {
           propName: 'address',
-          label: '地址',
+          label: '访问地址',
           showActionBar: false
         }
       ],
-      showBtn: true,
+      showBtn: false,
+      showSearchBtn: false,
       btnList: {
         label: '操作',
         actionBarList: [
@@ -105,12 +118,12 @@ export default {
         }
       ],
       searchItemList:[
-        {
-          type: 'input',
-          placeholder: '请输入姓名',
-          title: '姓名',
-          value: ''
-        },
+        // {
+        //   type: 'input',
+        //   placeholder: '请输入姓名',
+        //   title: '姓名',
+        //   value: ''
+        // },
         // {
         //   type: 'cascader',
         //   placeholder: '请输入部门',
@@ -348,8 +361,25 @@ export default {
         //     }
         //   ]
         // }
+      ],
+      systemList: [
+        {
+          name: '系统1'
+        },
+        {
+          name: '系统2'
+        },
+        {
+          name: '系统3'
+        },
+        {
+          name: '系统4'
+        }
       ]
     };
+  },
+  mounted() {
+    this.getTableData();
   },
   methods: {
     // 搜索表格数
@@ -361,7 +391,7 @@ export default {
     getTableData() {
       let sendData = {
         method: 'get',
-        url: '/api/register',
+        url: '/powerManage/menuList',
         data: {
           page: this.currentPage,
           size: this.pageSize

@@ -31,7 +31,7 @@
           :options="item.options"
           :key="index"></el-cascader>
       </template>
-      <el-button type="success" size="mini" @click="search" class="searchBtn">搜索</el-button>
+      <el-button v-if="showSearchBtn" type="success" size="mini" @click="search" class="searchBtn">搜索</el-button>
     </div>
   </div>
 </template>
@@ -51,6 +51,10 @@ export default {
       default: ()=> {
         return {};
       }
+    },
+    showSearchBtn: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
