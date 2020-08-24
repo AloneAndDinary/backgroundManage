@@ -158,7 +158,6 @@ request(sendData).then(res => {
   });
   console.log('格式后的路由', route);
 });
-
 // 格式路由
 function formatRouter(router) {
   if(router.hasChild) {
@@ -168,10 +167,11 @@ function formatRouter(router) {
     route.push(router);
   } else {
     const item = getItem(route, router.parentId);
+    console.log('找到的数据', item);
     if(item) {
       if(item.children){
         item.children.push(router);
-      }else {
+      } else {
         item.children = [];
         item.children.push(router);
       }
@@ -181,14 +181,16 @@ function formatRouter(router) {
 
 // 获取数据中与指定id相同的值
 function getItem(list,id) {
-  for(let i=0;i<list.length;i++) {
+  for(let i = 0; i < list.length; i++) {
     let item = list[i];
-    if(parseInt(item.id) === parseInt(id)){
+    if(item.id === id){
       return item;
     } else {
-      debugger;
       if (item.children) {
-        return getItem(item.children, id);
+        let returnData = getItem(item.children, id);
+        if(returnData) {
+          return returnData;
+        }
       }
     }
   }
