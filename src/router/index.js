@@ -153,30 +153,30 @@ let sendData = {
   }
 };
 request(sendData).then(res => {
-  res.forEach(item=>{
-    formatRouter(item);
-  });
+  formatRouter(res);
   console.log('格式后的路由', route);
 });
 // 格式路由
-function formatRouter(router) {
-  if(router.hasChild) {
-    router.children = [];
-  }
-  if(router.level === 0) {
-    route.push(router);
-  } else {
-    const item = getItem(route, router.parentId);
-    console.log('找到的数据', item);
-    if(item) {
-      if(item.children){
-        item.children.push(router);
-      } else {
-        item.children = [];
-        item.children.push(router);
+function formatRouter(data) {
+  data.forEach(router=>{
+    if(router.hasChild) {
+      router.children = [];
+    }
+    if(router.level === 0) {
+      route.push(router);
+    } else {
+      const item = getItem(route, router.parentId);
+      console.log('找到的数据', item);
+      if(item) {
+        if(item.children){
+          item.children.push(router);
+        } else {
+          item.children = [];
+          item.children.push(router);
+        }
       }
     }
-  }
+  });
 }
 
 // 获取数据中与指定id相同的值
