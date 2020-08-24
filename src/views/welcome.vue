@@ -15,7 +15,7 @@ export default {
     };
   },
   mounted() {
-    this.getDemo();
+    // this.getDemo();
   },
   methods:{
     getDemo() {

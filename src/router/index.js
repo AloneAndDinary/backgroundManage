@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Layout from '../components/Layout';
 import Level from '../components/Layout/levelComponent';
+import { request } from '@/network/require';
 Vue.use(VueRouter);
 const baseRoutes = [
   {
@@ -140,6 +141,58 @@ const baseRoutes = [
   }
 
 ];
+
+// const asyncRoutes = [];
+const route = [];
+let sendData = {
+  method: 'get',
+  url: '/router/getRouters',
+  data: {
+    page: 1,
+    size: 10
+  }
+};
+request(sendData).then(res => {
+  res.forEach(item=>{
+    formatRouter(item);
+  });
+  console.log('格式后的路由', route);
+});
+
+// 格式路由
+function formatRouter(router) {
+  if(router.hasChild) {
+    router.children = [];
+  }
+  if(router.level === 0) {
+    route.push(router);
+  } else {
+    const item = getItem(route, router.parentId);
+    if(item) {
+      if(item.children){
+        item.children.push(router);
+      }else {
+        item.children = [];
+        item.children.push(router);
+      }
+    }
+  }
+}
+
+// 获取数据中与指定id相同的值
+function getItem(list,id) {
+  for(let i=0;i<list.length;i++) {
+    let item = list[i];
+    if(parseInt(item.id) === parseInt(id)){
+      return item;
+    } else {
+      debugger;
+      if (item.children) {
+        return getItem(item.children, id);
+      }
+    }
+  }
+}
 
 const router = new VueRouter({
   base: '/cms/',
