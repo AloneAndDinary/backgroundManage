@@ -14,7 +14,7 @@ Mock.mock('/powerManage/menuList', 'get', () => {
 });
 
 Mock.mock('/router/getRouters', 'get', () => {
-  let routerList = [
+  const routerList = [
     {
       id: 1,
       path: '/powerManage',
