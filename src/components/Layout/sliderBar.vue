@@ -20,7 +20,6 @@
 
 <script>
 import ListTemplate from './listTemplate';
-import Layout from '@/components/Layout';
 import { mapGetters } from 'vuex';
 export default {
   name: "sliderBar",
@@ -36,26 +35,7 @@ export default {
       asyncRouter: 'asyncRouter'
     }),
     routerList() {
-      let routerList = [
-        {
-          path: '/welcome',
-          name: 'welcome',
-          otherName: '首页',
-          component: Layout,
-          meta: {canLogin: false},
-          redirect: '/welcome/index',
-          children: [
-            {
-              path: '/welcome/index',
-              name: 'welcomeIndex',
-              otherName: '欢迎',
-              component: () => import('@/views/welcome.vue'),
-              meta: {canLogin: false}
-            }
-          ]
-        }
-      ];
-      return routerList.concat(JSON.parse(this.asyncRouter));
+      return JSON.parse(this.asyncRouter);
     }
   },
   components: {

@@ -12,25 +12,10 @@ let baseRoutes = [
   },
   {
     path: '/',
-    name: 'Home',
-    component: Layout,
-    meta: { canLogin: false },
-    redirect: '/welcome'
-  },
-  {
-    path: '/welcome',
     name: 'welcome',
     component: Layout,
-    meta: {canLogin: false},
-    redirect: '/welcome/index',
-    children: [
-      {
-        path: '/welcome/index',
-        name: 'welcomeIndex',
-        component: () => import('../views/welcome.vue'),
-        meta: {canLogin: false}
-      }
-    ]
+    redirect: '/welcome',
+    meta: { canLogin: false }
   }
 ];
 
@@ -48,10 +33,10 @@ store.dispatch('getAsyncRouter').then(res=> {
 // 路由守卫
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.canLogin)) {
-    console.log('需要登录');
+    // console.log('需要登录');
     // 判断是否登录，若未登录跳转至登录页，若已登录则继续
   }else {
-    console.log('不需要登录');
+    // console.log('不需要登录');
     next();
   }
 });

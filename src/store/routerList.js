@@ -20,11 +20,7 @@ const commonState = {
         const route = [];
         let sendData = {
           method: 'get',
-          url: '/router/getRouters',
-          data: {
-            page: 1,
-            size: 10
-          }
+          url: '/router/getRouters'
         };
         request(sendData).then(res => {
           formatRouter(res, route);

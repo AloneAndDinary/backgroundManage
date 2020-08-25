@@ -3,6 +3,9 @@
       <el-table
         :ref="refName"
         :data="tableData"
+        @row-click="rowClick"
+        row-key="id"
+        :expand-row-keys="expandRowKeys"
         style="width: 100%">
         <el-table-column type="expand" v-if="isExpandTable">
           <template>
@@ -33,6 +36,12 @@ export default {
       }
     },
     columnData: {
+      type: Array,
+      default: () => {
+        return [];
+      }
+    },
+    expandRowKeys: {
       type: Array,
       default: () => {
         return [];
@@ -69,7 +78,9 @@ export default {
     };
   },
   methods: {
-
+    rowClick(row,column,event){
+      this.$emit('rowClick',row,column,event);
+    }
   }
 };
 </script>

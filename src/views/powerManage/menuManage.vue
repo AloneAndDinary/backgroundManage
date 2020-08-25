@@ -5,16 +5,19 @@
       :isExpandTable="isExpandTable"
       :tableData="tableData"
       :columnData="columnData"
-      :showCheckbox="showCheckbox"
       :refName="refName"
       :showBtn="showBtn"
       :btnList="btnList"
+      :expandRowKeys="expandRowKeys"
+      @rowClick="getSystemMenu"
       @btnClickEvent="btnClickEvent">
       <template slot='expandContent'>
         <div class="menuList">
           <el-collapse v-model="activeName" accordion>
-            <el-collapse-item :title="item.name" :name="i" v-for="(item,i) in systemList" :key="i">
-            </el-collapse-item>
+            <template v-for="(item,i) in systemList">
+              <el-collapse-item :title="item.otherName" :name="i" :key="i">
+              </el-collapse-item>
+            </template>
           </el-collapse>
         </div>
       </template>
@@ -52,38 +55,20 @@ export default {
       layout: `total,sizes,prev,pager,next,jumper`,
       showBackground: true,
       isExpandTable: true,
-      tableData: [
-        {
-          date: '系统1',
-          name: '2020-8-1',
-          address: '/cms'
-        }, {
-          date: '系统2',
-          name: '2020-8-4',
-          address: '/workbench'
-        }, {
-          date: '系统3',
-          name: '2020-8-1',
-          address: '/platform'
-        }, {
-          date: '系统4',
-          name: '2020-9-2',
-          address: '/test'
-        }
-      ],
+      tableData: [],
       columnData: [
         {
-          propName: 'date',
+          propName: 'systemName',
           label: '系统名称',
           showActionBar: false
         },
         {
-          propName: 'name',
+          propName: 'updateTime',
           label: '更新时间',
           showActionBar: false
         },
         {
-          propName: 'address',
+          propName: 'visitAddress',
           label: '访问地址',
           showActionBar: false
         }
@@ -362,29 +347,37 @@ export default {
         //   ]
         // }
       ],
-      systemList: [
-        {
-          name: '系统1'
-        },
-        {
-          name: '系统2'
-        },
-        {
-          name: '系统3'
-        },
-        {
-          name: '系统4'
-        }
-      ]
+      systemList: [],
+      expandRowKeys: []
     };
   },
   mounted() {
     this.getTableData();
   },
   methods: {
+    // 点击系统查找对应系统下的菜单
+    getSystemMenu(row) {
+      if (this.expandRowKeys.indexOf(row.id) === -1) {
+        this.expandRowKeys = [];
+        this.expandRowKeys.push(row.id);
+        let sendData = {
+          method: 'get',
+          url: '/powerManage/getSystemMenu',
+          data: {
+            id: row.id
+          }
+        };
+        request(sendData).then(res => {
+          const data = [];
+          funList.formatRouter(res, data);
+          this.systemList = data;
+        });
+      } else {
+        this.expandRowKeys.splice(this.expandRowKeys.indexOf(row.id), 1);
+      }
+    },
     // 搜索表格数
     search() {
-      console.log('搜索的数据', this.searchItemList);
       this.getTableData();
     },
     // 获取表格数据
@@ -398,9 +391,8 @@ export default {
         }
       };
       request(sendData).then(res => {
-        console.log(res);
+        this.tableData = res;
       });
-      console.log('获取表格数据', sendData);
     },
     // 按钮点击事件合集
     btnClickEvent(data) {
