@@ -11,6 +11,7 @@ export default new Vuex.Store({
   },
   getters: {
     openMenuList: state => state.commonState.openMenuList,
-    activeIndex: state => state.commonState.activeIndex
+    activeIndex: state => state.commonState.activeIndex,
+    asyncRouter: state => state.routerList.asyncRouter
   }
 });

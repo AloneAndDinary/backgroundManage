@@ -1,6 +1,8 @@
 import { setLocalItem, getLocalItem } from '@/util/commonUtil';
 import { request } from '@/network/require';
 import Layout from '@/components/Layout';
+// import router from '@/router';
+import Level from '@/components/Layout/levelComponent';
 const commonState = {
   state: {
     asyncRouter: getLocalItem('asyncRouter')?getLocalItem('asyncRouter'):[]
@@ -8,25 +10,28 @@ const commonState = {
   mutations: {
     // 设置路由
     SET_ASYNCROUTER(state, data) {
-      console.log('设置');
       state.asyncRouter = JSON.stringify(data);
       setLocalItem('asyncRouter', JSON.stringify(data));
     }
   },
   actions: {
-    getAsyncRouter({commit}) {
-      const route = [];
-      let sendData = {
-        method: 'get',
-        url: '/router/getRouters',
-        data: {
-          page: 1,
-          size: 10
-        }
-      };
-      request(sendData).then(res => {
-        formatRouter(res, route);
-        commit('SET_ASYNCROUTER', route);
+    getAsyncRouter() {
+      return new Promise((resolve, reject) => {
+        const route = [];
+        let sendData = {
+          method: 'get',
+          url: '/router/getRouters',
+          data: {
+            page: 1,
+            size: 10
+          }
+        };
+        request(sendData).then(res => {
+          formatRouter(res, route);
+          resolve(route);
+        }).catch(()=>{
+          reject();
+        });
       });
     }
   }
@@ -37,16 +42,18 @@ function formatRouter(data, route) {
     if(router.hasChild) {
       router.children = [];
     }
+    // 第一级 直接push进数组
     if(router.level === 0) {
       router.component = Layout;
       route.push(router);
     } else {
+      // 根据id获取对应的数据 判断数据为第几级 然后赋值
       const item = getItem(route, router.parentId);
-      if(item.children){
-        router.component = () => import("@/views" + router.path + ".vue");
+      if (router.level > 1 && item.children) {
+        item.component = Level;
         item.children.push(router);
       } else {
-        item.children = [];
+        router.component = () => import("@/views" + router.path + ".vue");
         item.children.push(router);
       }
     }

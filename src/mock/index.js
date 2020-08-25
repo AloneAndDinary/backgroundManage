@@ -69,6 +69,7 @@ Mock.mock('/router/getRouters', 'get', () => {
       path: '/test11',
       name: 'test11',
       otherName: '测试页面11',
+      // component: Layout,
       meta: {canLogin: false},
       redirect: '/test11/test1',
       parentId: 0,
@@ -93,6 +94,7 @@ Mock.mock('/router/getRouters', 'get', () => {
       path: '/test',
       name: 'test',
       otherName: '测试页面1',
+      // component: Layout,
       meta: {canLogin: false},
       redirect: '/test/test1',
       parentId: 0,
@@ -102,7 +104,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     },
     {
       id: 8,
-      path: '/test/test2',
+      path: '/test/test12',
       name: 'welcomeIndex',
       otherName: '测试页面1-2',
       // component: () => import('../views/welcome.vue'),
@@ -114,7 +116,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     },
     {
       id: 9,
-      path: '/test/test3',
+      path: '/test/test13',
       name: 'welcomeIndex',
       otherName: '测试页面1-3',
       // component: () => import('../views/welcome.vue'),
@@ -127,7 +129,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     },
     {
       id: 10,
-      path: '/test/test31',
+      path: '/test/test131',
       otherName: '测试页面3-1-1',
       name: 'welcomeIndex',
       // component: () => import('../views/welcome.vue'),
@@ -139,7 +141,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     },
     {
       id: 11,
-      path: '/test/test4',
+      path: '/test/test14',
       name: 'welcomeIndex',
       otherName: '测试页面1-4',
       // component: () => import('../views/welcome.vue'),

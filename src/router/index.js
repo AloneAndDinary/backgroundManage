@@ -2,22 +2,20 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Layout from '../components/Layout';
 import store from '@/store';
-
-// import Level from '../components/Layout/levelComponent';
 Vue.use(VueRouter);
 let baseRoutes = [
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('../views/404Page.vue'),
+    meta: { canLogin: false }
+  },
   {
     path: '/',
     name: 'Home',
     component: Layout,
     meta: { canLogin: false },
     redirect: '/welcome'
-  },
-  {
-    path: '/404',
-    name: '404',
-    component: () => import('../views/404Page.vue'),
-    meta: { canLogin: false }
   },
   {
     path: '/welcome',
@@ -40,12 +38,14 @@ const router = new VueRouter({
   base: '/cms/',
   routes:baseRoutes,
 });
-console.log(store);
-store.dispatch('getAsyncRouter').then(() => {
-  console.log('123');
-  console.log(store.state.routerList.asyncRouter);
+
+// 获取动态路由
+store.dispatch('getAsyncRouter').then(res=> {
+  router.addRoutes(res);
+  store.commit('SET_ASYNCROUTER', res);
 });
 
+// 路由守卫
 router.beforeEach((to, from, next) => {
   if(to.matched.some(record => record.meta.canLogin)) {
     console.log('需要登录');
