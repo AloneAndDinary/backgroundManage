@@ -1,5 +1,6 @@
 const Mock = require('mockjs');
 // const Random = Mock.Random;
+// 获取系统列表
 Mock.mock('/powerManage/menuList', 'get', () => {
   let systemList = [];
   let date = new Date();
@@ -14,6 +15,7 @@ Mock.mock('/powerManage/menuList', 'get', () => {
   return systemList;
 });
 
+// 获取系统下的菜单信息
 Mock.mock(`/powerManage/getSystemMenu`, 'get', () => {
   let systemList = [
     {
@@ -169,6 +171,7 @@ Mock.mock(`/powerManage/getSystemMenu`, 'get', () => {
   return systemList;
 });
 
+// 获取系统的路由信息
 Mock.mock('/router/getRouters', 'get', () => {
   const routerList = [
     {
@@ -218,9 +221,9 @@ Mock.mock('/router/getRouters', 'get', () => {
     },
     {
       id: 4,
-      path: '/powerManage/powerManage',
-      name: 'powerManage',
-      otherName: '权限管理',
+      path: '/powerManage/userManage',
+      name: 'userManage',
+      otherName: '用户管理',
       meta: {canLogin: false},
       parentId: 1,
       hasChild: false,
@@ -309,4 +312,64 @@ Mock.mock('/router/getRouters', 'get', () => {
     }
   ];
   return routerList;
+});
+
+// 获取用户列表
+Mock.mock('/powerManage/getUserList', 'get', () => {
+  const userList = [
+    {
+      id: 1,
+      name: '张三',
+      gender: '男',
+      role: '管理员',
+      roleId: 1
+    },
+    {
+      id: 2,
+      name: '李四',
+      gender: '男',
+      role: '普通用户',
+      roleId: 2
+    },
+    {
+      id: 3,
+      name: '王五',
+      gender: '女',
+      role: '普通用户',
+      roleId: 2
+    },
+    {
+      id: 4,
+      name: '赵六',
+      gender: '女',
+      role: '普通用户',
+      roleId: 2
+    }
+  ];
+  return userList;
+});
+
+// 获取角色列表
+Mock.mock('/powerManage/getRoleList', 'get',() => {
+  const role = [
+    {
+      id: 1,
+      name: '超级管理员',
+      createTime: '2020-08-25',
+      createName: 'admin'
+    },
+    {
+      id: 2,
+      name: '管理员',
+      createTime: '2020-08-25',
+      createName: 'admin'
+    },
+    {
+      id: 3,
+      name: '普通用户',
+      createTime: '2020-08-25',
+      createName: 'admin'
+    }
+  ];
+  return role;
 });

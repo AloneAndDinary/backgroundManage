@@ -27,7 +27,7 @@ import ControlBtn from '@/components/tableComponents/controlBtn.vue';
 import { request } from '@/network/require';
 import { funList } from '@/util/publicFun';
 export default {
-  name: "roleManage",
+  name: "userManage",
   components:{
     TableComponent,
     Pagination,
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      total: 3,
+      total: 4,
       pageSize: 10,
       currentPage: 1,
       layout: `total,sizes,prev,pager,next,jumper`,
@@ -48,13 +48,13 @@ export default {
           showActionBar: false
         },
         {
-          propName: 'createTime',
-          label: '创建时间',
+          propName: 'gender',
+          label: '性别',
           showActionBar: false
         },
         {
-          propName: 'createName',
-          label: '创建人',
+          propName: 'role',
+          label: '角色',
           showActionBar: false
         }
       ],
@@ -64,11 +64,7 @@ export default {
         label: '操作',
         actionBarList: [
           {
-            name: '查看权限',
-            type: 'view'
-          },
-          {
-            name: '编辑权限',
+            name: '编辑',
             type: 'edit'
           },
           {
@@ -345,7 +341,7 @@ export default {
     getTableData() {
       let sendData = {
         method: 'get',
-        url: '/powerManage/getRoleList'
+        url: '/powerManage/getUserList'
       };
       request(sendData).then(res => {
         this.tableData = res;
