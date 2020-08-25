@@ -1,8 +1,9 @@
 import router from '../router';
+import { setLocalItem, getLocalItem } from '@/util/commonUtil';
 const commonState = {
   state: {
-    openMenuList: window.localStorage.getItem('openMenuList')?JSON.parse(window.localStorage.getItem('openMenuList')):[],
-    activeIndex: window.localStorage.getItem('activeIndex')?window.localStorage.getItem('activeIndex'):0
+    openMenuList: getLocalItem('openMenuList')?JSON.parse(getLocalItem('openMenuList')):[],
+    activeIndex: getLocalItem('activeIndex')?getLocalItem('activeIndex'):0
   },
   mutations: {
     // 设置面包屑导航添加一项 同步设置当前激活菜单下标
@@ -18,7 +19,7 @@ const commonState = {
         router.push(menu.path);
       } else {
         state.openMenuList.push(menu);
-        window.localStorage.setItem('openMenuList', JSON.stringify(state.openMenuList));
+        setLocalItem('openMenuList', JSON.stringify(state.openMenuList));
         this.commit('SET_ACTIVEINDEX', state.openMenuList.length - 1);
       }
     },
@@ -27,7 +28,7 @@ const commonState = {
       state.openMenuList = state.openMenuList.filter((item) => {
         return item.path !== data.path;
       });
-      window.localStorage.setItem('openMenuList', state.openMenuList.filter((item) => {
+      setLocalItem('openMenuList', state.openMenuList.filter((item) => {
         return item.path !== data.path;
       }));
       if(state.openMenuList.length === 0) {
@@ -47,8 +48,10 @@ const commonState = {
     // 设置面包屑当前激活菜单下标
     SET_ACTIVEINDEX(state, index) {
       state.activeIndex = index;
-      window.localStorage.setItem('activeIndex', index);
+      setLocalItem('activeIndex', index);
     }
-  }
+  },
+  actions: {}
 };
+
 export default commonState;
