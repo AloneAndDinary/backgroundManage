@@ -5,6 +5,7 @@
         :data="tableData"
         @row-click="rowClick"
         row-key="id"
+        :tree-props="treeProp">
         :expand-row-keys="expandRowKeys"
         style="width: 100%">
         <el-table-column type="expand" v-if="isExpandTable">
@@ -64,6 +65,12 @@ export default {
       default: false
     },
     btnList: {
+      type: Object,
+      default: () => {
+        return {};
+      }
+    },
+    treeProp: {
       type: Object,
       default: () => {
         return {};

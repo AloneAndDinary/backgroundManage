@@ -2,14 +2,12 @@
   <div class="container">
     <ControlBtn :showSearchBtn="showSearchBtn" :control-btn="controlBtn" :searchItemList="searchItemList" @search="search"></ControlBtn>
     <TableComponent
-      :isExpandTable="isExpandTable"
       :tableData="tableData"
       :columnData="columnData"
       :refName="refName"
       :showBtn="showBtn"
       :btnList="btnList"
-      :expandRowKeys="expandRowKeys"
-      @rowClick="getSystemMenu"
+      :treeProp="treeProp"
       @btnClickEvent="btnClickEvent">
       <template slot='expandContent'>
         <div class="menuList">
@@ -48,8 +46,12 @@ export default {
   },
   data() {
     return {
+      treeProp: {
+        children: 'children',
+        hasChildren: 'hasChildren'
+      },
       activeName:'',
-      total: 100,
+      total: 4,
       pageSize: 10,
       currentPage: 1,
       layout: `total,sizes,prev,pager,next,jumper`,
@@ -58,22 +60,22 @@ export default {
       tableData: [],
       columnData: [
         {
-          propName: 'systemName',
-          label: '系统名称',
+          propName: 'otherName',
+          label: '菜单名称',
           showActionBar: false
         },
         {
-          propName: 'updateTime',
-          label: '更新时间',
+          propName: 'path',
+          label: '访问路径',
           showActionBar: false
         },
         {
-          propName: 'visitAddress',
-          label: '访问地址',
+          propName: 'path',
+          label: '文件位置',
           showActionBar: false
         }
       ],
-      showBtn: false,
+      showBtn: true,
       showSearchBtn: false,
       btnList: {
         label: '操作',
@@ -355,27 +357,6 @@ export default {
     this.getTableData();
   },
   methods: {
-    // 点击系统查找对应系统下的菜单
-    getSystemMenu(row) {
-      if (this.expandRowKeys.indexOf(row.id) === -1) {
-        this.expandRowKeys = [];
-        this.expandRowKeys.push(row.id);
-        let sendData = {
-          method: 'get',
-          url: '/powerManage/getSystemMenu',
-          data: {
-            id: row.id
-          }
-        };
-        request(sendData).then(res => {
-          const data = [];
-          funList.formatRouter(res, data);
-          this.systemList = data;
-        });
-      } else {
-        this.expandRowKeys.splice(this.expandRowKeys.indexOf(row.id), 1);
-      }
-    },
     // 搜索表格数
     search() {
       this.getTableData();
@@ -384,14 +365,17 @@ export default {
     getTableData() {
       let sendData = {
         method: 'get',
-        url: '/powerManage/menuList',
+        url: '/powerManage/getSystemMenu',
         data: {
           page: this.currentPage,
           size: this.pageSize
         }
       };
       request(sendData).then(res => {
-        this.tableData = res;
+        const data = [];
+        funList.formatRouter(res, data);
+        this.tableData = data;
+        console.log('列表数据', res);
       });
     },
     // 按钮点击事件合集
