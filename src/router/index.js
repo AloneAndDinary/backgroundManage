@@ -16,6 +16,21 @@ let baseRoutes = [
     component: Layout,
     redirect: '/welcome',
     meta: { canLogin: false }
+  },
+  {
+    path: '/welcome',
+    name: 'welcome',
+    component: Layout,
+    meta: { canLogin: false },
+    redirect: '/welcome/index',
+    children: [
+      {
+        path: '/welcome/index',
+        name: 'welcome',
+        component: () => import('@/views/welcome.vue'),
+        meta: { canLogin: false },
+      }
+    ]
   }
 ];
 

@@ -1,7 +1,7 @@
 <template>
     <div class="tableContainer">
       <el-table
-        :ref="refName"
+        ref="refName"
         :data="tableData"
         @row-click="rowClick"
         row-key="id"
@@ -18,7 +18,7 @@
         <template v-if="showBtn">
           <el-table-column :label="btnList.label">
             <template slot-scope="scope">
-              <el-button type="text" v-for="(detail,i) in btnList.actionBarList" :key="i" @click="btnClick(detail.type,scope.row)">{{ detail.name }}</el-button>
+              <el-button type="text" v-for="(detail,i) in btnList.actionBarList" :key="i" @click.stop="btnClick(detail.type,scope.row)">{{ detail.name }}</el-button>
             </template>
           </el-table-column>
         </template>
@@ -56,10 +56,6 @@ export default {
       type: Boolean,
       default: false
     },
-    refName: {
-      type: String,
-      default: 'table'
-    },
     showBtn: {
       type: Boolean,
       default: false
@@ -86,6 +82,7 @@ export default {
   },
   methods: {
     rowClick(row,column,event){
+      this.$refs.refName.toggleRowExpansion(row);
       this.$emit('rowClick',row,column,event);
     }
   }

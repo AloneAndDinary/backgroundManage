@@ -4,7 +4,6 @@
     <TableComponent
       :tableData="tableData"
       :columnData="columnData"
-      :refName="refName"
       :showBtn="showBtn"
       :btnList="btnList"
       @btnClickEvent="btnClickEvent">
@@ -73,7 +72,6 @@ export default {
           }
         ]
       },
-      refName: '',
       controlBtn: [
         {
           name: '新增',

@@ -4,10 +4,11 @@
     <TableComponent
       :tableData="tableData"
       :columnData="columnData"
-      :refName="refName"
       :showBtn="showBtn"
       :btnList="btnList"
       :treeProp="treeProp"
+      :expandRowKeys="expandRowKeys"
+      @rowClick="rowClick"
       @btnClickEvent="btnClickEvent">
       <template slot='expandContent'>
         <div class="menuList">
@@ -95,7 +96,6 @@ export default {
         ]
       },
       showCheckbox: false,
-      refName: '',
       controlBtn: [
         {
           name: '新增',
@@ -357,6 +357,10 @@ export default {
     this.getTableData();
   },
   methods: {
+    //行点击事件
+    rowClick(row) {
+      console.log(row);
+    },
     // 搜索表格数
     search() {
       this.getTableData();
@@ -382,9 +386,9 @@ export default {
     btnClickEvent(data) {
       console.log(data);
       switch (data.type) {
-      case 'view' : this.viewData();break;
-      case 'edit' : this.editData();break;
-      case 'delete' : this.delete();break;
+      case 'view' : this.viewData(data.data);break;
+      case 'edit' : this.editData(data.data);break;
+      case 'delete' : this.delete(data.data);break;
       }
     },
     // 查看功能
