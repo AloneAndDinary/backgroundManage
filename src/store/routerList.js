@@ -5,7 +5,7 @@ import Layout from '@/components/Layout';
 import Level from '@/components/Layout/levelComponent';
 const commonState = {
   state: {
-    asyncRouter: getLocalItem('asyncRouter')?getLocalItem('asyncRouter'):[]
+    asyncRouter: getLocalItem('asyncRouter')?JSON.parse(getLocalItem('asyncRouter')):[]
   },
   mutations: {
     // 设置路由

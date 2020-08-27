@@ -28,9 +28,9 @@ const commonState = {
       state.openMenuList = state.openMenuList.filter((item) => {
         return item.path !== data.path;
       });
-      setLocalItem('openMenuList', state.openMenuList.filter((item) => {
+      setLocalItem('openMenuList', JSON.stringify(state.openMenuList.filter((item) => {
         return item.path !== data.path;
-      }));
+      })));
       if(state.openMenuList.length === 0) {
         router.push('/');
       } else {
