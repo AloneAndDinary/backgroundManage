@@ -25,7 +25,8 @@ export default {
   name: "sliderBar",
   data() {
     return {
-      isCollapse: false
+      isCollapse: false,
+      routerList: []
     };
   },
   computed: {
@@ -33,15 +34,20 @@ export default {
       openMenuList: 'openMenuList',
       activeIndex: 'activeIndex',
       asyncRouter: 'asyncRouter'
-    }),
-    routerList() {
-      return JSON.parse(this.asyncRouter);
-    }
+    })
   },
   components: {
     ListTemplate
   },
-  mounted() {},
+  mounted() {
+    console.log(typeof this.asyncRouter);
+    if (typeof this.asyncRouter === 'string') {
+      this.routerList = JSON.parse(this.asyncRouter);
+    }else {
+      this.routerList = this.asyncRouter;
+
+    }
+  },
   methods: {
     menuItemClick(data) {
       this.$store.commit('SET_MENULIST', data);

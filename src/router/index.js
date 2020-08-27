@@ -12,7 +12,7 @@ let baseRoutes = [
   },
   {
     path: '/',
-    name: 'welcome',
+    name: 'homeIndex',
     component: Layout,
     redirect: '/welcome',
     meta: { canLogin: false }
@@ -26,7 +26,7 @@ let baseRoutes = [
     children: [
       {
         path: '/welcome/index',
-        name: 'welcome',
+        name: 'welcomeIndex',
         component: () => import('@/views/welcome.vue'),
         meta: { canLogin: false },
       }

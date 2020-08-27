@@ -177,7 +177,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     {
       id: 101,
       path: '/welcome',
-      name: 'welcome',
+      name: 'home',
       otherName: '首页',
       meta: {canLogin: false},
       parentId: 0,
@@ -275,7 +275,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     {
       id: 6,
       path: '/test11/test1',
-      name: 'welcomeIndex',
+      name: 'test1',
       otherName: '测试页面11-1',
       meta: {canLogin: false},
       parentId: 5,
@@ -298,7 +298,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     {
       id: 8,
       path: '/test/test12',
-      name: 'welcomeIndex',
+      name: 'test12',
       otherName: '测试页面1-2',
       meta: {canLogin: false},
       parentId: 7,
@@ -309,7 +309,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     {
       id: 9,
       path: '/test/test13',
-      name: 'welcomeIndex',
+      name: 'test13',
       otherName: '测试页面1-3',
       meta: {canLogin: false},
       redirect: '/test/test31',
@@ -322,7 +322,7 @@ Mock.mock('/router/getRouters', 'get', () => {
       id: 10,
       path: '/test/test131',
       otherName: '测试页面3-1-1',
-      name: 'welcomeIndex',
+      name: 'test131',
       meta: {canLogin: false},
       parentId: 9,
       hasChild: false,
@@ -332,7 +332,7 @@ Mock.mock('/router/getRouters', 'get', () => {
     {
       id: 11,
       path: '/test/test14',
-      name: 'welcomeIndex',
+      name: 'test14',
       otherName: '测试页面1-4',
       meta: {canLogin: false},
       parentId: 7,
