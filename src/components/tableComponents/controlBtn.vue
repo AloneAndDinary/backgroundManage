@@ -1,7 +1,7 @@
 <template>
   <div class="controlBtn">
     <div class="btnList">
-      <el-button v-for="(btn, i) in controlBtn" :key="i" :size="btn.size" :type="btn.type" :class="btn.position">{{ btn.name }}</el-button>
+      <el-button v-for="(btn, i) in controlBtn" :key="i" :size="btn.size" :type="btn.type" :class="btn.position" @click="btnClick(btn)">{{ btn.name }}</el-button>
     </div>
     <div class="searchList">
       <template v-for="(item, index) in searchItemList">
@@ -60,6 +60,9 @@ export default {
   methods: {
     search() {
       this.$emit('search');
+    },
+    btnClick(data) {
+      this.$emit('btnClick', data);
     }
   }
 };

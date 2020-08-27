@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <ControlBtn :showSearchBtn="showSearchBtn" :control-btn="controlBtn" :searchItemList="searchItemList" @search="search"></ControlBtn>
+    <ControlBtn :showSearchBtn="showSearchBtn" :control-btn="controlBtn" :searchItemList="searchItemList" @search="search" @btnClick="btnClick"></ControlBtn>
     <TableComponent
       :tableData="tableData"
       :columnData="columnData"
@@ -29,6 +29,10 @@
       :showBackground="showBackground"
       @handleSizeChange="handleSizeChange"
       @handleCurrentChange="handleCurrentChange"/>
+
+    <el-dialog title="新增菜单" :visible.sync="dialogTableVisible" width="37vw">
+      <MenuDialog></MenuDialog>
+    </el-dialog>
   </div>
 </template>
 
@@ -36,14 +40,17 @@
 import TableComponent from '@/components/tableComponents/tableComponent.vue';
 import Pagination from '@/components/tableComponents/pagination.vue';
 import ControlBtn from '@/components/tableComponents/controlBtn.vue';
+import MenuDialog from './menuDialog';
 import { request } from '@/network/require';
 import { funList } from '@/util/publicFun';
+
 export default {
   name: "menuMenage",
   components:{
     TableComponent,
     Pagination,
-    ControlBtn
+    ControlBtn,
+    MenuDialog
   },
   data() {
     return {
@@ -350,13 +357,20 @@ export default {
         // }
       ],
       systemList: [],
-      expandRowKeys: []
+      expandRowKeys: [],
+      dialogTableVisible: false
     };
   },
   mounted() {
     this.getTableData();
   },
   methods: {
+    // 按钮点击事件
+    btnClick(data) {
+      if(data.name === '新增') {
+        this.dialogTableVisible = true;
+      }
+    },
     //行点击事件
     rowClick(row) {
       console.log(row);
