@@ -183,7 +183,12 @@ Mock.mock('/router/getRouters', 'get', () => {
       parentId: 0,
       hasChild: false,
       isMenu: true,
-      level: 0
+      level: 0,
+      isOpenBlank: false,
+      isShow: true,
+      filePath: '/welcome',
+      sort: 1,
+      systemId: 1
     },
     {
       id: 1,
@@ -195,7 +200,12 @@ Mock.mock('/router/getRouters', 'get', () => {
       parentId: 0,
       hasChild: true,
       isMenu: true,
-      level: 0
+      level: 0,
+      isOpenBlank: false,
+      isShow: true,
+      filePath: '/powerManage',
+      sort: 2,
+      systemId: 1
     },
     {
       id: 2,
@@ -206,7 +216,12 @@ Mock.mock('/router/getRouters', 'get', () => {
       parentId: 1,
       hasChild: false,
       isMenu: true,
-      level: 1
+      level: 1,
+      isOpenBlank: false,
+      isShow: true,
+      filePath: '/powerManage/menuManage',
+      sort: 1,
+      systemId: 1
     },
     {
       id: 3,
@@ -217,7 +232,12 @@ Mock.mock('/router/getRouters', 'get', () => {
       parentId: 1,
       hasChild: false,
       isMenu: true,
-      level: 1
+      level: 1,
+      isOpenBlank: false,
+      isShow: true,
+      filePath: '/powerManage/roleManage',
+      sort: 2,
+      systemId: 1
     },
     {
       id: 4,
@@ -228,7 +248,12 @@ Mock.mock('/router/getRouters', 'get', () => {
       parentId: 1,
       hasChild: false,
       isMenu: true,
-      level: 1
+      level: 1,
+      isOpenBlank: false,
+      isShow: true,
+      filePath: '/powerManage/userManage',
+      sort: 3,
+      systemId: 1
     },
     {
       id: 5,
@@ -240,7 +265,12 @@ Mock.mock('/router/getRouters', 'get', () => {
       parentId: 0,
       hasChild: true,
       isMenu: true,
-      level: 0
+      level: 0,
+      isOpenBlank: false,
+      isShow: true,
+      filePath: '/test11',
+      sort: 3,
+      systemId: 1
     },
     {
       id: 6,
