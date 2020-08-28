@@ -5,24 +5,24 @@ import { funList } from '@/util/publicFun';
 const resourceData = [
   {
     id: 1,
-    systemName: '系统1',
-    visitAddress: '/system1'
+    otherName: '系统1',
+    path: '/system1'
   },{
     id: 2,
-    systemName: '系统2',
-    visitAddress: '/system2'
+    otherName: '系统2',
+    path: '/system2'
   },{
     id: 3,
-    systemName: '系统3',
-    visitAddress: '/system3'
+    otherName: '系统3',
+    path: '/system3'
   },{
     id: 4,
-    systemName: '系统4',
-    visitAddress: '/system4'
+    otherName: '系统4',
+    path: '/system4'
   },{
     id: 5,
-    systemName: '系统5',
-    visitAddress: '/system5'
+    otherName: '系统5',
+    path: '/system5'
   }
 ];
 
@@ -228,10 +228,12 @@ const menuList = [
 
 // 获取系统列表
 Mock.mock('/powerManage/menuList', 'get', () => {
+  const systemData = JSON.parse(JSON.stringify(resourceData));
   const requireData = [];
   const routerList = [];
+  let require = [];
   funList.formatRouter(menuList, routerList);
-  resourceData.forEach(item => {
+  systemData.forEach(item => {
     item.children = [];
     requireData.push(item);
     routerList.forEach(route=>{
@@ -240,7 +242,11 @@ Mock.mock('/powerManage/menuList', 'get', () => {
       }
     });
   });
-  return requireData;
+  require=JSON.parse(JSON.stringify(requireData));
+  require.forEach(item=>{
+    item.id = '0' + item.id;
+  });
+  return require;
 });
 
 // 获取系统下的菜单信息

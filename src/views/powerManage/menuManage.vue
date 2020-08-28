@@ -68,17 +68,17 @@ export default {
       tableData: [],
       columnData: [
         {
-          propName: 'systemName',
+          propName: 'otherName',
           label: '菜单名称',
           showActionBar: false
         },
         {
-          propName: 'visitAddress',
+          propName: 'path',
           label: '访问路径',
           showActionBar: false
         },
         {
-          propName: 'visitAddress',
+          propName: 'filePath',
           label: '文件位置',
           showActionBar: false
         }

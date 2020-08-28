@@ -52,7 +52,7 @@
           <el-form-item label="父级：">
             <el-select v-model="form.parentId" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in systemList"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"></el-option>

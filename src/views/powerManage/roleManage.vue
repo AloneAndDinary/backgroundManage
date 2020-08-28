@@ -16,6 +16,10 @@
       :showBackground="showBackground"
       @handleSizeChange="handleSizeChange"
       @handleCurrentChange="handleCurrentChange"/>
+
+    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible">
+      <RoleDialog></RoleDialog>
+    </el-dialog>
   </div>
 </template>
 
@@ -23,6 +27,7 @@
 import TableComponent from '@/components/tableComponents/tableComponent.vue';
 import Pagination from '@/components/tableComponents/pagination.vue';
 import ControlBtn from '@/components/tableComponents/controlBtn.vue';
+import RoleDialog from './roleDialog';
 import { request } from '@/network/require';
 import { funList } from '@/util/publicFun';
 export default {
@@ -30,7 +35,8 @@ export default {
   components:{
     TableComponent,
     Pagination,
-    ControlBtn
+    ControlBtn,
+    RoleDialog
   },
   data() {
     return {
@@ -328,7 +334,9 @@ export default {
         //     }
         //   ]
         // }
-      ]
+      ],
+      dialogVisible: false,
+      dialogTitle: '新增角色'
     };
   },
   mounted() {
@@ -353,19 +361,22 @@ export default {
     btnClickEvent(data) {
       console.log(data);
       switch (data.type) {
-      case 'view' : this.viewData();break;
-      case 'edit' : this.editData();break;
-      case 'delete' : this.delete();break;
+      case 'view' : this.viewData(data);break;
+      case 'edit' : this.editData(data);break;
+      case 'delete' : this.delete(data);break;
       }
     },
     // 查看功能
     viewData(data) {
       funList.alertMessage('success', '查看功能');
+      this.dialogTitle = '查看角色权限';
       console.log('处理查看功能', data);
     },
     // 编辑功能
     editData(data) {
-      funList.alertMessage('warning', '编辑功能');
+      // funList.alertMessage('warning', '编辑功能');
+      this.dialogTitle = '编辑角色权限';
+      this.dialogVisible = true;
       console.log('处理编辑功能', data);
     },
     // 删除功能

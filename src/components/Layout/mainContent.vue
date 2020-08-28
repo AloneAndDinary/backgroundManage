@@ -5,6 +5,16 @@
                 {{ menu.otherName }}
                 <i class="close el-icon-close" @click.stop="closeMenuItem(menu, index)"></i>
             </span>
+            <span class="closeMenu">
+                 <el-select v-model="closeType" placeholder="请选择">
+                    <el-option
+                      v-for="item in closeTypeList"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value">
+                    </el-option>
+                  </el-select>
+            </span>
         </div>
         <router-view></router-view>
     </div>
@@ -31,7 +41,21 @@ export default {
   },
   data() {
     return {
-      // activeIndex: 0
+      closeType : 'closeAll',
+      closeTypeList: [
+        {
+          label: '关闭所有',
+          value: 'closeAll'
+        },
+        {
+          label: '关闭其他',
+          value: 'closeOther'
+        },
+        {
+          label: '关闭当前',
+          value: 'closeCurrent'
+        }
+      ]
     };
   },
   methods: {
@@ -65,6 +89,7 @@ export default {
 <style scoped lang="less">
     @import '../../css/framework';
     .breadcrumb{
+        position: relative;
         width: @breadcrumbWidth;
         height: @breadcrumbHeight;
         line-height: @breadcrumbHeight;
@@ -85,6 +110,21 @@ export default {
         span.isActive{
             background: @breadItemHoverBgColor;
             color: @breadItemHoverColor;
+        }
+        .closeMenu{
+            position: absolute;
+            border: none;
+            line-height: 35px;
+            right: 0;
+            padding: 0;
+            &:hover{
+                background: none;
+                color: #000;
+            }
+            /deep/ .el-input__inner{
+                border: none;
+                width: 110px;
+            }
         }
     }
 </style>
