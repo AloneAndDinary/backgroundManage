@@ -68,17 +68,17 @@ export default {
       tableData: [],
       columnData: [
         {
-          propName: 'otherName',
+          propName: 'systemName',
           label: '菜单名称',
           showActionBar: false
         },
         {
-          propName: 'path',
+          propName: 'visitAddress',
           label: '访问路径',
           showActionBar: false
         },
         {
-          propName: 'path',
+          propName: 'visitAddress',
           label: '文件位置',
           showActionBar: false
         }
@@ -383,16 +383,15 @@ export default {
     getTableData() {
       let sendData = {
         method: 'get',
-        url: '/powerManage/getSystemMenu',
+        url: '/powerManage/menuList',
         data: {
-          page: this.currentPage,
-          size: this.pageSize
+          systemId: 1
         }
       };
       request(sendData).then(res => {
-        const data = [];
-        funList.formatRouter(res, data);
-        this.tableData = data;
+        // const data = [];
+        // funList.formatRouter(res, data);
+        this.tableData = res;
         console.log('列表数据', res);
       });
     },
