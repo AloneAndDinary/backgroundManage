@@ -1,33 +1,34 @@
 <template>
   <div class="container">
-    <ControlBtn :showSearchBtn="showSearchBtn" :control-btn="controlBtn" :searchItemList="searchItemList" @search="search"></ControlBtn>
+    <ControlBtn :show-search-btn="showSearchBtn" :control-btn="controlBtn" :search-item-list="searchItemList" @search="search" />
     <TableComponent
-      :tableData="tableData"
-      :columnData="columnData"
-      :showBtn="showBtn"
-      :btnList="btnList"
-      @btnClickEvent="btnClickEvent">
-    </TableComponent>
+      :table-data="tableData"
+      :column-data="columnData"
+      :show-btn="showBtn"
+      :btn-list="btnList"
+      @btnClickEvent="btnClickEvent"
+    />
     <Pagination
       :total="total"
-      :pageSize.sync="pageSize"
-      :currentPage.sync="currentPage"
+      :page-size.sync="pageSize"
+      :current-page.sync="currentPage"
       :layout="layout"
-      :showBackground="showBackground"
+      :show-background="showBackground"
       @handleSizeChange="handleSizeChange"
-      @handleCurrentChange="handleCurrentChange"/>
+      @handleCurrentChange="handleCurrentChange"
+    />
   </div>
 </template>
 
 <script>
-import TableComponent from '@/components/tableComponents/tableComponent.vue';
-import Pagination from '@/components/tableComponents/pagination.vue';
-import ControlBtn from '@/components/tableComponents/controlBtn.vue';
-import { request } from '@/network/require';
-import { funList } from '@/util/publicFun';
+import TableComponent from '@/components/tableComponents/tableComponent.vue'
+import Pagination from '@/components/tableComponents/pagination.vue'
+import ControlBtn from '@/components/tableComponents/controlBtn.vue'
+import { request } from '@/network/require'
+import { funList } from '@/util/publicFun'
 export default {
-  name: "userManage",
-  components:{
+  name: 'UserManage',
+  components: {
     TableComponent,
     Pagination,
     ControlBtn
@@ -37,7 +38,7 @@ export default {
       total: 4,
       pageSize: 10,
       currentPage: 1,
-      layout: `total,sizes,prev,pager,next,jumper`,
+      layout: 'total,sizes,prev,pager,next,jumper',
       showBackground: true,
       tableData: [],
       columnData: [
@@ -80,7 +81,7 @@ export default {
           position: 'left'
         }
       ],
-      searchItemList:[
+      searchItemList: [
         // {
         //   type: 'input',
         //   placeholder: '请输入姓名',
@@ -325,64 +326,64 @@ export default {
         //   ]
         // }
       ]
-    };
+    }
   },
   mounted() {
-    this.getTableData();
+    this.getTableData()
   },
   methods: {
     // 搜索表格数
     search() {
-      this.getTableData();
+      this.getTableData()
     },
     // 获取表格数据
     getTableData() {
-      let sendData = {
+      const sendData = {
         method: 'get',
         url: '/powerManage/getUserList'
-      };
+      }
       request(sendData).then(res => {
-        this.tableData = res;
-      });
+        this.tableData = res
+      })
     },
     // 按钮点击事件合集
     btnClickEvent(data) {
-      console.log(data);
+      console.log(data)
       switch (data.type) {
-      case 'view' : this.viewData();break;
-      case 'edit' : this.editData();break;
-      case 'delete' : this.delete();break;
+        case 'view' : this.viewData(); break
+        case 'edit' : this.editData(); break
+        case 'delete' : this['delete'](); break
       }
     },
     // 查看功能
     viewData(data) {
-      funList.alertMessage('success', '查看功能');
-      console.log('处理查看功能', data);
+      funList.alertMessage('success', '查看功能')
+      console.log('处理查看功能', data)
     },
     // 编辑功能
     editData(data) {
-      funList.alertMessage('warning', '编辑功能');
-      console.log('处理编辑功能', data);
+      funList.alertMessage('warning', '编辑功能')
+      console.log('处理编辑功能', data)
     },
     // 删除功能
     delete(data) {
       funList.confirmDialog(() => {
-        funList.alertMessage('error', '删除功能');
-      }, '您确定要删除该数据吗？');
-      console.log('处理删除功能', data);
+        funList.alertMessage('error', '删除功能')
+      }, '您确定要删除该数据吗？')
+      console.log('处理删除功能', data)
     },
     // 分页页数切换
     handleSizeChange(size) {
-      this.pageSize = size;
-      this.getTableData();
+      this.pageSize = size
+      this.getTableData()
     },
     // 分页页码切换
     handleCurrentChange(page) {
-      this.currentPage = page;
-      this.getTableData();
+      this.currentPage = page
+      this.getTableData()
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

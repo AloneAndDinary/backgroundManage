@@ -1,13 +1,13 @@
 <template>
-    <div id="footerPage">
-        底部链接
-    </div>
+  <div id="footerPage">
+    底部链接
+  </div>
 </template>
 
 <script>
 export default {
-  name: "footerPage"
-};
+  name: 'FooterPage'
+}
 </script>
 
 <style scoped>

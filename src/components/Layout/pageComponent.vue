@@ -1,55 +1,55 @@
 <template>
-    <div class="pageContainer">
-      <el-pagination
-        :background="showBackground"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-size="pageSize"
-        :layout="layout"
-        :total="total">
-      </el-pagination>
-    </div>
+  <div class="pageContainer">
+    <el-pagination
+      :background="showBackground"
+      :current-page="currentPage"
+      :page-size="pageSize"
+      :layout="layout"
+      :total="total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
+  </div>
 </template>
 
 <script>
-  export default {
-    name: "pageComponent",
-    props: {
-      total: {
-        type: Number,
-        default: 0
-      },
-      pageSize: {
-        type: Number,
-        default: 10
-      },
-      currentPage: {
-        type: Number,
-        default: 1
-      },
-      layout: {
-        type: String,
-        default: ''
-      },
-      showBackground: {
-        type: Boolean,
-        default: true
-      }
+export default {
+  name: 'PageComponent',
+  props: {
+    total: {
+      type: Number,
+      default: 0
     },
-    data() {
-      return {
-      }
+    pageSize: {
+      type: Number,
+      default: 10
     },
-    methods: {
-      handleSizeChange(size) {
-        this.$emit('handleSizeChange', size);
-      },
-      handleCurrentChange(page) {
-        this.$emit('handleCurrentChange', page);
-      }
+    currentPage: {
+      type: Number,
+      default: 1
+    },
+    layout: {
+      type: String,
+      default: ''
+    },
+    showBackground: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data() {
+    return {
+    }
+  },
+  methods: {
+    handleSizeChange(size) {
+      this.$emit('handleSizeChange', size)
+    },
+    handleCurrentChange(page) {
+      this.$emit('handleCurrentChange', page)
     }
   }
+}
 </script>
 
 <style scoped>

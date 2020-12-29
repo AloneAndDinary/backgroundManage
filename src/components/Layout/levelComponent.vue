@@ -1,14 +1,14 @@
 <template>
   <div>
     第三级
-    <router-view></router-view>
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "levelComponent"
-};
+  name: 'LevelComponent'
+}
 </script>
 
 <style scoped>

@@ -8,48 +8,49 @@
         <div :key="item.title" class="title">
           <span>{{ item.title }}:</span>
         </div>
-        <el-input v-if="item.type==='input'" v-model="item.value" :placeholder="item.placeholder" :key="index"></el-input>
-        <el-select v-if="item.type==='select'" v-model="item.value" :placeholder="item.placeholder" :key="index">
+        <el-input v-if="item.type==='input'" :key="index" v-model="item.value" :placeholder="item.placeholder" />
+        <el-select v-if="item.type==='select'" :key="index" v-model="item.value" :placeholder="item.placeholder">
           <el-option
             v-for="option in item.options"
             :key="option.value"
             :label="option.label"
-            :value="option.value">
-          </el-option>
+            :value="option.value"
+          />
         </el-select>
         <el-date-picker
           v-if="item.type === 'time'"
+          :key="index"
           v-model="item.value"
           type="date"
           value-format="yyyy-MM-dd"
-          :key="index"
-          :placeholder="item.placeholder">
-        </el-date-picker>
+          :placeholder="item.placeholder"
+        />
         <el-cascader
           v-if="item.type === 'cascader'"
+          :key="index"
           v-model="item.value"
           :options="item.options"
-          :key="index"></el-cascader>
+        />
       </template>
-      <el-button v-if="showSearchBtn" type="success" size="mini" @click="search" class="searchBtn">搜索</el-button>
+      <el-button v-if="showSearchBtn" type="success" size="mini" class="searchBtn" @click="search">搜索</el-button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "controlBtn",
+  name: 'ControlBtn',
   props: {
     controlBtn: {
       type: Array,
-      default: ()=>{
-        return [];
+      default: () => {
+        return []
       }
     },
     searchItemList: {
       type: Array,
-      default: ()=> {
-        return {};
+      default: () => {
+        return {}
       }
     },
     showSearchBtn: {
@@ -59,13 +60,13 @@ export default {
   },
   methods: {
     search() {
-      this.$emit('search');
+      this.$emit('search')
     },
     btnClick(data) {
-      this.$emit('btnClick', data);
+      this.$emit('btnClick', data)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

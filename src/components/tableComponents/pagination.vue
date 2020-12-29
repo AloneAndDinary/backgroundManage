@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import basePageConfig from '../../config/basePageConfig'
 export default {
   name: 'Pagination',
   props: {
@@ -28,10 +29,10 @@ export default {
       type: Number,
       default: 0
     },
-    showBackground: {
-      type: Boolean,
-      default: false
-    },
+    // showBackground: {
+    //   type: Boolean,
+    //   default: false
+    // },
     layout: {
       type: String,
       default: ''
@@ -39,18 +40,21 @@ export default {
   },
   data() {
     return {
-      pageSizes: [10, 20, 30, 50]
-    };
+      pageSizes: [10, 20, 30, 50], showBackground: ''
+    }
+  },
+  mounted() {
+    console.log(basePageConfig)
   },
   methods: {
     handleSizeChange(val) {
-      this.$emit('handleSizeChange', val);
+      this.$emit('handleSizeChange', val)
     },
     handleCurrentChange(val) {
-      this.$emit('handleCurrentChange', val);
+      this.$emit('handleCurrentChange', val)
     }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

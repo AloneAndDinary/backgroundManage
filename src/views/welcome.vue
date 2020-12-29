@@ -1,35 +1,35 @@
 <template>
-    <div>
-        欢迎
-    </div>
+  <div>
+    欢迎
+  </div>
 </template>
 
 <script>
-import { request } from '../network/require';
-require('../mock');
+import { request } from '../network/require'
+require('../mock')
 export default {
-  name: "welcome",
+  name: 'Welcome',
   data() {
     return {
 
-    };
+    }
   },
   mounted() {
     // this.getDemo();
   },
-  methods:{
+  methods: {
     getDemo() {
-      let sendData = {
+      const sendData = {
         method: 'get',
         url: '/api/register',
         data: {}
-      };
+      }
       request(sendData).then(res => {
-        console.log('返回的数据', res);
-      });
+        console.log('返回的数据', res)
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>

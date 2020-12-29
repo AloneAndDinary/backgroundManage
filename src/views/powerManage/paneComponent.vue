@@ -1,14 +1,14 @@
 <template>
   <div>
     <el-collapse accordion>
-      <el-collapse-item :name="item.id" v-for="(item,index) in dataList" :key="index">
+      <el-collapse-item v-for="(item,index) in dataList" :key="index" :name="item.id">
         <template slot="title">
-          <span>{{item.otherName}}</span>
+          <span>{{ item.otherName }}</span>
           <span style="position: absolute;right: 85px;">
-            是否可访问: <el-switch v-model="item.isShow" active-text="是" inactive-text="否"></el-switch>
+            是否可访问: <el-switch v-model="item.isShow" active-text="是" inactive-text="否" />
           </span>
         </template>
-        <paneComponent v-if="item.hasChild" :dataList="item.children"></paneComponent>
+        <paneComponent v-if="item.hasChild" :data-list="item.children" />
         <div v-else>展示的内容</div>
       </el-collapse-item>
     </el-collapse>
@@ -17,21 +17,21 @@
 
 <script>
 export default {
-  name: "paneComponent",
+  name: 'PaneComponent',
   props: {
     dataList: {
       type: Array,
       default: () => {
-        return [];
+        return []
       }
     }
   },
   data() {
     return {
       activeName: '1'
-    };
+    }
   }
-};
+}
 </script>
 
 <style scoped lang="less">

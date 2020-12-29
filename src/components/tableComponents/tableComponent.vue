@@ -1,51 +1,52 @@
 <template>
-    <div class="tableContainer">
-      <el-table
-        ref="refName"
-        :data="tableData"
-        @row-click="rowClick"
-        row-key="id"
-        :tree-props="treeProp">
-        :expand-row-keys="expandRowKeys"
-        style="width: 100%">
-        <el-table-column type="expand" v-if="isExpandTable">
-          <template>
-            <slot name="expandContent"></slot>
+  <div class="tableContainer">
+    <el-table
+      ref="refName"
+      :data="tableData"
+      row-key="id"
+      :tree-props="treeProp"
+      :expand-row-keys="expandRowKeys"
+      style="width: 100%"
+      @row-click="rowClick"
+    >
+      <el-table-column v-if="isExpandTable" type="expand">
+        <template>
+          <slot name="expandContent" />
+        </template>
+      </el-table-column>
+      <el-table-column v-if="showCheckbox" type="selection" width="55" />
+      <el-table-column v-for="(item,index) in columnData" :key="index" :prop="item.propName" :label="item.label" />
+      <template v-if="showBtn">
+        <el-table-column :label="btnList.label">
+          <template slot-scope="scope">
+            <el-button v-for="(detail,i) in btnList.actionBarList" :key="i" type="text" @click.stop="btnClick(detail.type,scope.row)">{{ detail.name }}</el-button>
           </template>
         </el-table-column>
-        <el-table-column v-if="showCheckbox" type="selection" width="55"></el-table-column>
-        <el-table-column v-for="(item,index) in columnData" :key="index" :prop="item.propName" :label="item.label"></el-table-column>
-        <template v-if="showBtn">
-          <el-table-column :label="btnList.label">
-            <template slot-scope="scope">
-              <el-button type="text" v-for="(detail,i) in btnList.actionBarList" :key="i" @click.stop="btnClick(detail.type,scope.row)">{{ detail.name }}</el-button>
-            </template>
-          </el-table-column>
-        </template>
-      </el-table>
-    </div>
+      </template>
+    </el-table>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "tableComponent",
+  name: 'TableComponent',
   props: {
     tableData: {
       type: Array,
       default: () => {
-        return [];
+        return []
       }
     },
     columnData: {
       type: Array,
       default: () => {
-        return [];
+        return []
       }
     },
     expandRowKeys: {
       type: Array,
       default: () => {
-        return [];
+        return []
       }
     },
     showCheckbox: {
@@ -63,30 +64,30 @@ export default {
     btnList: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       }
     },
     treeProp: {
       type: Object,
       default: () => {
-        return {};
+        return {}
       }
     }
   },
   data() {
     return {
-      btnClick(type,data) {
-        this.$emit('btnClickEvent',{type,data});
+      btnClick(type, data) {
+        this.$emit('btnClickEvent', { type, data })
       }
-    };
+    }
   },
   methods: {
-    rowClick(row,column,event){
-      this.$refs.refName.toggleRowExpansion(row);
-      this.$emit('rowClick',row,column,event);
+    rowClick(row, column, event) {
+      this.$refs.refName.toggleRowExpansion(row)
+      this.$emit('rowClick', row, column, event)
     }
   }
-};
+}
 </script>
 
 <style scoped>

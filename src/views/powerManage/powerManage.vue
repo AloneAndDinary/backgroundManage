@@ -4,8 +4,8 @@
 
 <script>
 export default {
-  name: "powerManage"
-};
+  name: 'PowerManage'
+}
 </script>
 
 <style scoped>
