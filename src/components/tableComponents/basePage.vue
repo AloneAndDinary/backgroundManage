@@ -17,11 +17,25 @@ import tableComponent from './tableComponent'
 import pagination from './pagination'
 import controlBtn from './controlBtn'
 export default {
-  name: 'BaseTable',
+  name: 'BasePage',
   components: {
     tableComponent,
     pagination,
     controlBtn
+  },
+  props: {
+    currentPage: {
+      type: Number,
+      default: 1
+    },
+    pageSize: {
+      type: Number,
+      default: 10
+    },
+    total: {
+      type: Number,
+      default: 0
+    }
   },
   data() {
     return {

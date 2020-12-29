@@ -6,6 +6,7 @@
       :total="total"
       :background="showBackground"
       :layout="layout"
+      :page-sizes="pageSizes"
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
@@ -28,19 +29,13 @@ export default {
     total: {
       type: Number,
       default: 0
-    },
-    // showBackground: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    layout: {
-      type: String,
-      default: ''
     }
   },
   data() {
     return {
-      pageSizes: [10, 20, 30, 50], showBackground: ''
+      pageSizes: basePageConfig.pageSizeList,
+      showBackground: basePageConfig.showBackground,
+      layout: basePageConfig.layout
     }
   },
   mounted() {
