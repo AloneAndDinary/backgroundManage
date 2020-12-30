@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import { request } from '../network/require'
-require('../mock')
+import { request } from '../network/require';
+require('../mock');
 export default {
   name: 'Welcome',
   data() {
     return {
 
-    }
+    };
   },
   mounted() {
     // this.getDemo();
@@ -23,13 +23,13 @@ export default {
         method: 'get',
         url: '/api/register',
         data: {}
-      }
+      };
       request(sendData).then(res => {
-        console.log('返回的数据', res)
-      })
+        console.log('返回的数据', res);
+      });
     }
   }
-}
+};
 </script>
 
 <style scoped>

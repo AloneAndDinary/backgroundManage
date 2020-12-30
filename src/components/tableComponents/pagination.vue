@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import basePageConfig from '../../config/basePageConfig'
+import basePageConfig from '../../config/basePageConfig';
 export default {
   name: 'Pagination',
   props: {
@@ -36,20 +36,20 @@ export default {
       pageSizes: basePageConfig.pageSizeList,
       showBackground: basePageConfig.showBackground,
       layout: basePageConfig.layout
-    }
+    };
   },
   mounted() {
-    console.log(basePageConfig)
+    console.log(basePageConfig);
   },
   methods: {
     handleSizeChange(val) {
-      this.$emit('handleSizeChange', val)
+      this.$emit('handleSizeChange', val);
     },
     handleCurrentChange(val) {
-      this.$emit('handleCurrentChange', val)
+      this.$emit('handleCurrentChange', val);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">

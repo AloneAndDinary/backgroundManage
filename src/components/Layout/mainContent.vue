@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainContent',
@@ -35,7 +35,7 @@ export default {
     setting: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       }
     }
   },
@@ -56,34 +56,34 @@ export default {
           value: 'closeCurrent'
         }
       ]
-    }
+    };
   },
   methods: {
     // 点击面包屑跳转到对应的路由
     menuLinkTo(data, index) {
-      this.$router.push(data.path)
-      this.$store.commit('SET_ACTIVEINDEX', index)
+      this.$router.push(data.path);
+      this.$store.commit('SET_ACTIVEINDEX', index);
     },
     // 关闭面包导航一项
     closeMenuItem(data, index) {
-      let activeIndex = 0
-      this.$store.commit('DELETE_MENULIST_ITEM', { path: data.path, index })
+      let activeIndex = 0;
+      this.$store.commit('DELETE_MENULIST_ITEM', { path: data.path, index });
       if (index !== 0 && index !== this.openMenuList.length) {
-        activeIndex = index
+        activeIndex = index;
       }
       if (index === 0) {
-        activeIndex = 0
+        activeIndex = 0;
       }
       if (index === this.openMenuList.length) {
-        activeIndex = index - 1
+        activeIndex = index - 1;
       }
       if (this.openMenuList.length === 0) {
-        activeIndex = 0
+        activeIndex = 0;
       }
-      this.$store.commit('SET_ACTIVEINDEX', activeIndex)
+      this.$store.commit('SET_ACTIVEINDEX', activeIndex);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">

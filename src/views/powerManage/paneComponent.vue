@@ -22,16 +22,16 @@ export default {
     dataList: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     }
   },
   data() {
     return {
       activeName: '1'
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped lang="less">

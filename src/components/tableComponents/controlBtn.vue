@@ -44,13 +44,13 @@ export default {
     controlBtn: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     },
     searchItemList: {
       type: Array,
       default: () => {
-        return {}
+        return {};
       }
     },
     showSearchBtn: {
@@ -60,13 +60,13 @@ export default {
   },
   methods: {
     search() {
-      this.$emit('search')
+      this.$emit('search');
     },
     btnClick(data) {
-      this.$emit('btnClick', data)
+      this.$emit('btnClick', data);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">

@@ -8,7 +8,7 @@
 <script>
 export default {
   name: 'LevelComponent'
-}
+};
 </script>
 
 <style scoped>

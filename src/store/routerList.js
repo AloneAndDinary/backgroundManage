@@ -5,7 +5,7 @@ import Layout from '@/components/Layout';
 import Level from '@/components/Layout/levelComponent';
 const commonState = {
   state: {
-    asyncRouter: getLocalItem('asyncRouter')?JSON.parse(getLocalItem('asyncRouter')):[]
+    asyncRouter: getLocalItem('asyncRouter') ? JSON.parse(getLocalItem('asyncRouter')) : []
   },
   mutations: {
     // 设置路由
@@ -18,14 +18,14 @@ const commonState = {
     getAsyncRouter() {
       return new Promise((resolve, reject) => {
         const route = [];
-        let sendData = {
+        const sendData = {
           method: 'get',
           url: '/router/getRouters'
         };
         request(sendData).then(res => {
           formatRouter(res, route);
           resolve(route);
-        }).catch(()=>{
+        }).catch(() => {
           reject();
         });
       });
@@ -34,12 +34,12 @@ const commonState = {
 };
 // 格式路由
 function formatRouter(data, route) {
-  data.forEach(router=>{
-    if(router.hasChild) {
+  data.forEach(router => {
+    if (router.hasChild) {
       router.children = [];
     }
     // 第一级 直接push进数组
-    if(router.level === 0) {
+    if (router.level === 0) {
       router.component = Layout;
       route.push(router);
     } else {
@@ -49,7 +49,7 @@ function formatRouter(data, route) {
         item.component = Level;
         item.children.push(router);
       } else {
-        router.component = () => import("@/views" + router.path + ".vue");
+        router.component = () => import('@/views' + router.path + '.vue');
         item.children.push(router);
       }
     }
@@ -57,15 +57,15 @@ function formatRouter(data, route) {
 }
 
 // 获取数据中与指定id相同的值
-function getItem(list,id) {
-  for(let i = 0; i < list.length; i++) {
-    let item = list[i];
-    if(item.id === id){
+function getItem(list, id) {
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i];
+    if (item.id === id) {
       return item;
     } else {
       if (item.children) {
-        let returnData = getItem(item.children, id);
-        if(returnData) {
+        const returnData = getItem(item.children, id);
+        if (returnData) {
           return returnData;
         }
       }

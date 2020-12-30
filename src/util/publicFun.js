@@ -1,7 +1,7 @@
 import Vue from 'vue';
 export const funList = {
   // 展示提示框
-  alertMessage: (type,message) => {
+  alertMessage: (type, message) => {
     Vue.prototype.$message({
       type: type,
       message: message,
@@ -23,12 +23,12 @@ export const funList = {
   },
   // 格式路由
   formatRouter(data, route) {
-    data.forEach(router=>{
-      if(router.hasChild) {
+    data.forEach(router => {
+      if (router.hasChild) {
         router.children = [];
       }
       // 第一级 直接push进数组
-      if(router.level === 0) {
+      if (router.level === 0) {
         route.push(router);
       } else {
       // 根据id获取对应的数据 判断数据为第几级 然后赋值
@@ -43,15 +43,15 @@ export const funList = {
   },
 
   // 获取数据中与指定id相同的值
-  getItem(list,id) {
-    for(let i = 0; i < list.length; i++) {
-      let item = list[i];
-      if(item.id === id){
+  getItem(list, id) {
+    for (let i = 0; i < list.length; i++) {
+      const item = list[i];
+      if (item.id === id) {
         return item;
       } else {
         if (item.children) {
-          let returnData = this.getItem(item.children, id);
-          if(returnData) {
+          const returnData = this.getItem(item.children, id);
+          if (returnData) {
             return returnData;
           }
         }

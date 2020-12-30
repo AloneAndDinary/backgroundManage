@@ -19,15 +19,15 @@
 </template>
 
 <script>
-import ListTemplate from './listTemplate'
-import { mapGetters } from 'vuex'
+import ListTemplate from './listTemplate';
+import { mapGetters } from 'vuex';
 export default {
   name: 'SliderBar',
   data() {
     return {
       isCollapse: false,
       routerList: []
-    }
+    };
   },
   computed: {
     ...mapGetters({
@@ -40,20 +40,20 @@ export default {
     ListTemplate
   },
   mounted() {
-    console.log(typeof this.asyncRouter)
+    console.log(typeof this.asyncRouter);
     if (typeof this.asyncRouter === 'string') {
-      this.routerList = JSON.parse(this.asyncRouter)
+      this.routerList = JSON.parse(this.asyncRouter);
     } else {
-      this.routerList = this.asyncRouter
+      this.routerList = this.asyncRouter;
     }
   },
   methods: {
     menuItemClick(data) {
-      this.$store.commit('SET_MENULIST', data)
-      this.$router.push(data.path)
+      this.$store.commit('SET_MENULIST', data);
+      this.$router.push(data.path);
     }
   }
-}
+};
 </script>
 
 <style scoped>

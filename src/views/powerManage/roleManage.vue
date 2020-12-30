@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import TableComponent from '@/components/tableComponents/tableComponent.vue'
-import Pagination from '@/components/tableComponents/pagination.vue'
-import ControlBtn from '@/components/tableComponents/controlBtn.vue'
-import RoleDialog from './roleDialog'
-import { request } from '@/network/require'
-import { funList } from '@/util/publicFun'
+import TableComponent from '@/components/tableComponents/tableComponent.vue';
+import Pagination from '@/components/tableComponents/pagination.vue';
+import ControlBtn from '@/components/tableComponents/controlBtn.vue';
+import RoleDialog from './roleDialog';
+import { request } from '@/network/require';
+import { funList } from '@/util/publicFun';
 export default {
   name: 'RoleManage',
   components: {
@@ -352,67 +352,67 @@ export default {
       ],
       dialogVisible: false,
       dialogTitle: '新增角色'
-    }
+    };
   },
   mounted() {
-    this.getTableData()
+    this.getTableData();
   },
   methods: {
     // 搜索表格数
     search() {
-      this.getTableData()
+      this.getTableData();
     },
     // 获取表格数据
     getTableData() {
       const sendData = {
         method: 'get',
         url: '/powerManage/getRoleList'
-      }
+      };
       request(sendData).then(res => {
-        this.tableData = res
-      })
+        this.tableData = res;
+      });
     },
     // 按钮点击事件合集
     btnClickEvent(data) {
-      console.log(data)
+      console.log(data);
       switch (data.type) {
-        case 'view' : this.viewData(data); break
-        case 'edit' : this.editData(data); break
-        case 'delete' : this['delete'](data); break
+        case 'view' : this.viewData(data); break;
+        case 'edit' : this.editData(data); break;
+        case 'delete' : this['delete'](data); break;
       }
     },
     // 查看功能
     viewData(data) {
-      funList.alertMessage('success', '查看功能')
-      this.dialogTitle = '查看角色权限'
-      console.log('处理查看功能', data)
+      funList.alertMessage('success', '查看功能');
+      this.dialogTitle = '查看角色权限';
+      console.log('处理查看功能', data);
     },
     // 编辑功能
     editData(data) {
       // funList.alertMessage('warning', '编辑功能');
-      this.dialogTitle = '编辑角色权限'
-      this.dialogVisible = true
-      console.log('处理编辑功能', data)
+      this.dialogTitle = '编辑角色权限';
+      this.dialogVisible = true;
+      console.log('处理编辑功能', data);
     },
     // 删除功能
     delete(data) {
       funList.confirmDialog(() => {
-        funList.alertMessage('error', '删除功能')
-      }, '您确定要删除该数据吗？')
-      console.log('处理删除功能', data)
+        funList.alertMessage('error', '删除功能');
+      }, '您确定要删除该数据吗？');
+      console.log('处理删除功能', data);
     },
     // 分页页数切换
     handleSizeChange(size) {
-      this.pageSize = size
-      this.getTableData()
+      this.pageSize = size;
+      this.getTableData();
     },
     // 分页页码切换
     handleCurrentChange(page) {
-      this.currentPage = page
-      this.getTableData()
+      this.currentPage = page;
+      this.getTableData();
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">

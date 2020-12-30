@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'PowerManage'
-}
+};
 </script>
 
 <style scoped>

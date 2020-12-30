@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Layout from '../components/Layout';
 import store from '@/store';
 Vue.use(VueRouter);
-let baseRoutes = [
+const baseRoutes = [
   {
     path: '/404',
     name: '404',
@@ -28,7 +28,7 @@ let baseRoutes = [
         path: '/welcome/index',
         name: 'welcomeIndex',
         component: () => import('@/views/welcome.vue'),
-        meta: { canLogin: false },
+        meta: { canLogin: false }
       }
     ]
   }
@@ -36,21 +36,21 @@ let baseRoutes = [
 
 const router = new VueRouter({
   base: '/cms/',
-  routes:baseRoutes,
+  routes: baseRoutes
 });
 
 // 获取动态路由
-store.dispatch('getAsyncRouter').then(res=> {
+store.dispatch('getAsyncRouter').then(res => {
   router.addRoutes(res);
   store.commit('SET_ASYNCROUTER', res);
 });
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
-  if(to.matched.some(record => record.meta.canLogin)) {
+  if (to.matched.some(record => record.meta.canLogin)) {
     // console.log('需要登录');
     // 判断是否登录，若未登录跳转至登录页，若已登录则继续
-  }else {
+  } else {
     // console.log('不需要登录');
     next();
   }

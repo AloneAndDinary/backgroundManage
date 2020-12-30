@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import { request } from '../../network/require'
-import PanelComponent from './paneComponent'
+import { request } from '../../network/require';
+import PanelComponent from './paneComponent';
 export default {
   name: 'RoleDialog',
   components: {
@@ -20,10 +20,10 @@ export default {
     return {
       menuList: [],
       activeName: '0'
-    }
+    };
   },
   mounted() {
-    this.getSystemList()
+    this.getSystemList();
   },
   methods: {
     // 获取系统
@@ -34,18 +34,18 @@ export default {
         data: {
           systemId: 1
         }
-      }
+      };
       request(sendData).then(res => {
-        this.menuList = res
-        console.log('列表数据', res)
-      })
+        this.menuList = res;
+        console.log('列表数据', res);
+      });
     },
     // 标签切换
     handleClick(tab, event) {
-      console.log(tab, event)
+      console.log(tab, event);
     }
   }
-}
+};
 </script>
 
 <style scoped lang="less">

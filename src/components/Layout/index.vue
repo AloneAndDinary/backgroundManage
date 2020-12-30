@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import SliderBar from './sliderBar'
-import HeaderPage from './header'
-import MainContent from './mainContent'
-import footerPage from './footer'
-import { defaultSetting } from '@/config/config'
+import SliderBar from './sliderBar';
+import HeaderPage from './header';
+import MainContent from './mainContent';
+import footerPage from './footer';
+import { defaultSetting } from '@/config/config';
 export default {
   name: 'Index',
   components: {
@@ -43,13 +43,13 @@ export default {
   data() {
     return {
       setting: {}
-    }
+    };
   },
   mounted() {
-    console.log(defaultSetting)
-    this.setting = defaultSetting
+    console.log(defaultSetting);
+    this.setting = defaultSetting;
   }
-}
+};
 </script>
 
 <style scoped lang="less">

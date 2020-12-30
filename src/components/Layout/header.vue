@@ -39,7 +39,7 @@ export default {
     setting: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       }
     }
   },
@@ -47,9 +47,9 @@ export default {
     return {
       activeIndex: '1',
       userName: '张三'
-    }
+    };
   }
-}
+};
 </script>
 
 <style scoped lang="less">

@@ -34,19 +34,19 @@ export default {
     tableData: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     },
     columnData: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     },
     expandRowKeys: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     },
     showCheckbox: {
@@ -64,30 +64,30 @@ export default {
     btnList: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       }
     },
     treeProp: {
       type: Object,
       default: () => {
-        return {}
+        return {};
       }
     }
   },
   data() {
     return {
       btnClick(type, data) {
-        this.$emit('btnClickEvent', { type, data })
+        this.$emit('btnClickEvent', { type, data });
       }
-    }
+    };
   },
   methods: {
     rowClick(row, column, event) {
-      this.$refs.refName.toggleRowExpansion(row)
-      this.$emit('rowClick', row, column, event)
+      this.$refs.refName.toggleRowExpansion(row);
+      this.$emit('rowClick', row, column, event);
     }
   }
-}
+};
 </script>
 
 <style scoped>

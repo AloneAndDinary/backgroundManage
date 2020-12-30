@@ -7,19 +7,19 @@ const resourceData = [
     id: 1,
     otherName: '系统1',
     path: '/system1'
-  },{
+  }, {
     id: 2,
     otherName: '系统2',
     path: '/system2'
-  },{
+  }, {
     id: 3,
     otherName: '系统3',
     path: '/system3'
-  },{
+  }, {
     id: 4,
     otherName: '系统4',
     path: '/system4'
-  },{
+  }, {
     id: 5,
     otherName: '系统5',
     path: '/system5'
@@ -32,7 +32,7 @@ const menuList = [
     path: '/welcome',
     name: 'home',
     otherName: '首页',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 0,
     hasChild: false,
     isMenu: true,
@@ -48,7 +48,7 @@ const menuList = [
     path: '/powerManage',
     name: 'powerManage',
     otherName: '权限管理',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     redirect: '/powerManage/menuManage',
     parentId: 0,
     hasChild: true,
@@ -65,7 +65,7 @@ const menuList = [
     path: '/powerManage/menuManage',
     name: 'menuManage',
     otherName: '菜单管理',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 2,
     hasChild: false,
     isMenu: true,
@@ -81,7 +81,7 @@ const menuList = [
     path: '/powerManage/roleManage',
     name: 'roleManage',
     otherName: '角色管理',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 2,
     hasChild: false,
     isMenu: true,
@@ -97,7 +97,7 @@ const menuList = [
     path: '/powerManage/userManage',
     name: 'userManage',
     otherName: '用户管理',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 2,
     hasChild: false,
     isMenu: true,
@@ -113,7 +113,7 @@ const menuList = [
     path: '/test11',
     name: 'test11',
     otherName: '测试页面11',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     redirect: '/test11/test1',
     parentId: 0,
     hasChild: true,
@@ -130,7 +130,7 @@ const menuList = [
     path: '/test11/test1',
     name: 'test1',
     otherName: '测试页面11-1',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 6,
     hasChild: false,
     isMenu: true,
@@ -146,7 +146,7 @@ const menuList = [
     path: '/test',
     name: 'test',
     otherName: '测试页面1',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     redirect: '/test/test1',
     parentId: 0,
     hasChild: true,
@@ -163,7 +163,7 @@ const menuList = [
     path: '/test/test12',
     name: 'test12',
     otherName: '测试页面1-2',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 8,
     hasChild: false,
     isMenu: true,
@@ -179,7 +179,7 @@ const menuList = [
     path: '/test/test13',
     name: 'test13',
     otherName: '测试页面1-3',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     redirect: '/test/test31',
     parentId: 8,
     hasChild: true,
@@ -196,7 +196,7 @@ const menuList = [
     path: '/test/test131',
     otherName: '测试页面3-1-1',
     name: 'test131',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 10,
     hasChild: false,
     isMenu: true,
@@ -212,7 +212,7 @@ const menuList = [
     path: '/test/test14',
     name: 'test14',
     otherName: '测试页面1-4',
-    meta: {canLogin: false},
+    meta: { canLogin: false },
     parentId: 8,
     hasChild: false,
     isMenu: true,
@@ -225,7 +225,6 @@ const menuList = [
   }
 ];
 
-
 // 获取系统列表
 Mock.mock('/powerManage/menuList', 'get', () => {
   const systemData = JSON.parse(JSON.stringify(resourceData));
@@ -236,14 +235,14 @@ Mock.mock('/powerManage/menuList', 'get', () => {
   systemData.forEach(item => {
     item.children = [];
     requireData.push(item);
-    routerList.forEach(route=>{
-      if(route.systemId === item.id) {
+    routerList.forEach(route => {
+      if (route.systemId === item.id) {
         item.children.push(route);
       }
     });
   });
-  require=JSON.parse(JSON.stringify(requireData));
-  require.forEach(item=>{
+  require = JSON.parse(JSON.stringify(requireData));
+  require.forEach(item => {
     item.id = '0' + item.id;
   });
   return require;
@@ -296,7 +295,7 @@ Mock.mock('/powerManage/getUserList', 'get', () => {
 });
 
 // 获取角色列表
-Mock.mock('/powerManage/getRoleList', 'get',() => {
+Mock.mock('/powerManage/getRoleList', 'get', () => {
   const role = [
     {
       id: 1,

@@ -13,9 +13,9 @@
 </template>
 
 <script>
-import tableComponent from './tableComponent'
-import pagination from './pagination'
-import controlBtn from './controlBtn'
+import tableComponent from './tableComponent';
+import pagination from './pagination';
+import controlBtn from './controlBtn';
 export default {
   name: 'BasePage',
   components: {
@@ -40,9 +40,15 @@ export default {
   data() {
     return {
       tableData: {}
+    };
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(val);
+      this.$emit('handleSizeChange', val);
     }
   }
-}
+};
 </script>
 
 <style scoped>

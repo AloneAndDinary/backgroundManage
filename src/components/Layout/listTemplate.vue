@@ -17,17 +17,17 @@ export default {
     childrenList: {
       type: Array,
       default: () => {
-        return []
+        return [];
       }
     }
   },
   methods: {
     menuItemClick(data) {
-      this.$store.commit('SET_MENULIST', data)
-      this.$router.push(data.path)
+      this.$store.commit('SET_MENULIST', data);
+      this.$router.push(data.path);
     }
   }
-}
+};
 </script>
 
 <style scoped>

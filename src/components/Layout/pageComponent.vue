@@ -39,17 +39,17 @@ export default {
   },
   data() {
     return {
-    }
+    };
   },
   methods: {
     handleSizeChange(size) {
-      this.$emit('handleSizeChange', size)
+      this.$emit('handleSizeChange', size);
     },
     handleCurrentChange(page) {
-      this.$emit('handleCurrentChange', page)
+      this.$emit('handleCurrentChange', page);
     }
   }
-}
+};
 </script>
 
 <style scoped>
