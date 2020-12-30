@@ -15,7 +15,7 @@ export default {
     };
   },
   mounted() {
-    // this.getDemo();
+    console.log('配置的数据', process.env.NODE_ENV);
   },
   methods: {
     getDemo() {

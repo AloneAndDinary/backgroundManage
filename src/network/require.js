@@ -1,6 +1,7 @@
 import axios from 'axios';
 export function request(config) {
   return new Promise((resolve, reject) => {
+    console.log('接口配置', process.env);
     // 创建axios实例
     const requests = axios.create({
       // baseURL: process.env.VUE_APP_API, // 基础url,如果是多环境配置这样写，也可以像下面一行的写死。
@@ -35,6 +36,7 @@ export function request(config) {
       //   return res;
       // }
     }, err);
+    // 请求接口
     requests(config).then(res => {
       resolve(res);
     }).catch(err => reject(err));

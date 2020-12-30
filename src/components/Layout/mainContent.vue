@@ -25,12 +25,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainContent',
-  computed: {
-    ...mapGetters({
-      openMenuList: 'openMenuList',
-      activeIndex: 'activeIndex'
-    })
-  },
   props: {
     setting: {
       type: Object,
@@ -57,6 +51,12 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    ...mapGetters({
+      openMenuList: 'openMenuList',
+      activeIndex: 'activeIndex'
+    })
   },
   methods: {
     // 点击面包屑跳转到对应的路由

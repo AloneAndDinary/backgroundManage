@@ -50,7 +50,7 @@ export default {
     searchItemList: {
       type: Array,
       default: () => {
-        return {};
+        return [];
       }
     },
     showSearchBtn: {

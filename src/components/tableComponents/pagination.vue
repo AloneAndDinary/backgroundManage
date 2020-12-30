@@ -35,7 +35,7 @@ export default {
     return {
       pageSizes: basePageConfig.pageSizeList,
       showBackground: basePageConfig.showBackground,
-      layout: basePageConfig.layout
+      layout: basePageConfig.layout.join(',')
     };
   },
   mounted() {

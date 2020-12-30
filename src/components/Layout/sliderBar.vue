@@ -23,6 +23,9 @@ import ListTemplate from './listTemplate';
 import { mapGetters } from 'vuex';
 export default {
   name: 'SliderBar',
+  components: {
+    ListTemplate
+  },
   data() {
     return {
       isCollapse: false,
@@ -35,9 +38,6 @@ export default {
       activeIndex: 'activeIndex',
       asyncRouter: 'asyncRouter'
     })
-  },
-  components: {
-    ListTemplate
   },
   mounted() {
     console.log(typeof this.asyncRouter);

@@ -4,16 +4,9 @@
       ref="refName"
       :data="tableData"
       row-key="id"
-      :tree-props="treeProp"
-      :expand-row-keys="expandRowKeys"
       style="width: 100%"
       @row-click="rowClick"
     >
-      <el-table-column v-if="isExpandTable" type="expand">
-        <template>
-          <slot name="expandContent" />
-        </template>
-      </el-table-column>
       <el-table-column v-if="showCheckbox" type="selection" width="55" />
       <el-table-column v-for="(item,index) in columnData" :key="index" :prop="item.propName" :label="item.label" />
       <template v-if="showBtn">
@@ -43,17 +36,7 @@ export default {
         return [];
       }
     },
-    expandRowKeys: {
-      type: Array,
-      default: () => {
-        return [];
-      }
-    },
     showCheckbox: {
-      type: Boolean,
-      default: false
-    },
-    isExpandTable: {
       type: Boolean,
       default: false
     },
@@ -62,12 +45,6 @@ export default {
       default: false
     },
     btnList: {
-      type: Object,
-      default: () => {
-        return {};
-      }
-    },
-    treeProp: {
       type: Object,
       default: () => {
         return {};

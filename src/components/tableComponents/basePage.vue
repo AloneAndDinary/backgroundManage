@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <div class="searchList">
-      <controlBtn />
+      <controlBtn :search-item-list="searchItemList" :control-btn="controlBtn" :show-search-btn="showSearchBtn" />
     </div>
     <div class="tableContent">
-      <tableComponent />
+      <tableComponent :table-data="tableData" :column-data="columnData" :show-checkbox="showCheckbox" :show-btn="showBtn" :btn-list="btnList" />
     </div>
     <div class="paginationContent">
-      <pagination />
+      <pagination :current-page="currentPage" :page-size="pageSize" :total="total" />
     </div>
   </div>
 </template>
@@ -39,7 +39,14 @@ export default {
   },
   data() {
     return {
-      tableData: {}
+      btnList: true,
+      showBtn: false,
+      showCheckbox: false,
+      columnData: [],
+      tableData: {},
+      controlBtn: [],
+      searchItemList: [],
+      showSearchBtn: false
     };
   },
   methods: {
