@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasePage />
+    <BasePage :base-config="baseConfig"/>
   </div>
 </template>
 
@@ -17,7 +17,23 @@ export default {
         searchConfig: {},
         tableConfig: {
           tableData: [], //  表格数据
-          tableColumn: [], // 表格表头配置信息
+          tableColumn: [
+            {
+              propName: 'name',
+              label: '姓名',
+              showActionBar: false
+            },
+            {
+              propName: 'gender',
+              label: '性别',
+              showActionBar: false
+            },
+            {
+              propName: 'role',
+              label: '角色',
+              showActionBar: false
+            }
+          ], // 表格表头配置信息
           showColumnBtn: true, // 是否展示表格操作栏
           columnBtnList: [], // 操作栏按钮列表
           showCheckbox: false // 是否展示复选框
