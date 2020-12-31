@@ -1,5 +1,5 @@
-@headerBgColor: #B3C0D1;
-@asideBgColor: #D3DCE6;
+@headerBgColor: #409EFF;
+@asideBgColor: #fff;
 @mainBgColor: #E9EEF3;
 
 
@@ -18,7 +18,7 @@
 @splitLineWidth:1px;
 
 @titleFontSize: 24px;
-@titleColor: #ddd;
+@titleColor: #fff;
 
 @breadcrumbWidth: calc(100% - 20px);
 @breadcrumbHeight: 40px;
@@ -74,6 +74,17 @@ body > .el-container {
 }
 .el-header{
   padding-left: 0px;
+}
+/deep/ .el-menu-item, /deep/ .el-submenu__title{
+  &:hover{
+    background: @asideBgColor;
+    color: #000;
+  }
+}
+/deep/ .el-menu-item.is-active{
+  background: @asideBgColor;
+  color: #4390ed;
+  font-weight: bold;
 }
 /deep/ .el-submenu__title{
   text-align: @menuTextAlign;

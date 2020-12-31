@@ -78,10 +78,12 @@ export default {
         .userInfo{
             position: absolute;
             right: 0px;
+            color: @titleColor;
             font-size: @userInfoFontSize;
             span.logOut{
                 &:hover{
-                    color: #4390ed;
+                  text-decoration: underline;
+                    /*color: #4390ed;*/
                     cursor: pointer;
                 }
             }
