@@ -250,7 +250,6 @@ Mock.mock('/powerManage/menuList', 'get', () => {
 
 // 获取系统下的菜单信息
 Mock.mock(`/powerManage/getSystemMenu`, 'get', (res) => {
-  console.log(JSON.parse(res.body));
   return menuList;
 });
 

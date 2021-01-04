@@ -37,7 +37,6 @@ export default {
       };
       request(sendData).then(res => {
         this.menuList = res;
-        console.log('列表数据', res);
       });
     },
     // 标签切换

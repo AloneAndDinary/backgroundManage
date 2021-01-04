@@ -40,7 +40,6 @@ export default {
     })
   },
   mounted() {
-    console.log(typeof this.asyncRouter);
     if (typeof this.asyncRouter === 'string') {
       this.routerList = JSON.parse(this.asyncRouter);
     } else {

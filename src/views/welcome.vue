@@ -15,7 +15,6 @@ export default {
     };
   },
   mounted() {
-    console.log('配置的数据', process.env.NODE_ENV);
   },
   methods: {
     getDemo() {
@@ -25,7 +24,6 @@ export default {
         data: {}
       };
       request(sendData).then(res => {
-        console.log('返回的数据', res);
       });
     }
   }
