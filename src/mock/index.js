@@ -56,7 +56,7 @@ const menuList = [
     level: 0,
     isOpenBlank: false,
     isShow: true,
-    filePath: '/powerManage',
+    filePath: '/powerManage/menuManage/menuManage',
     sort: 2,
     systemId: 1
   },
@@ -72,7 +72,7 @@ const menuList = [
     level: 1,
     isOpenBlank: false,
     isShow: true,
-    filePath: '/powerManage/menuManage',
+    filePath: '/powerManage/menuManage/menuManage',
     sort: 1,
     systemId: 1
   },
@@ -88,7 +88,7 @@ const menuList = [
     level: 1,
     isOpenBlank: false,
     isShow: true,
-    filePath: '/powerManage/roleManage',
+    filePath: '/powerManage/roleManage/roleManage',
     sort: 2,
     systemId: 1
   },
@@ -104,7 +104,7 @@ const menuList = [
     level: 1,
     isOpenBlank: false,
     isShow: true,
-    filePath: '/powerManage/userManage',
+    filePath: '/powerManage/userManage/userManage',
     sort: 3,
     systemId: 1
   },

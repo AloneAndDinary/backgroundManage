@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { request } from '../../network/require';
+import { request } from '../../../network/require';
 import PanelComponent from './paneComponent';
 export default {
   name: 'RoleDialog',

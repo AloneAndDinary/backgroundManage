@@ -1,13 +1,26 @@
 <template>
   <div class="container">
-    <ControlBtn :show-search-btn="showSearchBtn" :control-btn="controlBtn" :search-item-list="searchItemList" @search="search" />
+    <ControlBtn :show-search-btn="showSearchBtn" :control-btn="controlBtn" :search-item-list="searchItemList" @search="search" @btnClick="btnClick" />
     <TableComponent
       :table-data="tableData"
       :column-data="columnData"
       :show-btn="showBtn"
       :btn-list="btnList"
+      :tree-prop="treeProp"
+      :expand-row-keys="expandRowKeys"
+      @rowClick="rowClick"
       @btnClickEvent="btnClickEvent"
-    />
+    >
+      <template slot="expandContent">
+        <div class="menuList">
+          <el-collapse v-model="activeName" accordion>
+            <template v-for="(item,i) in systemList">
+              <el-collapse-item :key="i" :title="item.otherName" :name="i" />
+            </template>
+          </el-collapse>
+        </div>
+      </template>
+    </TableComponent>
     <Pagination
       :total="total"
       :page-size.sync="pageSize"
@@ -17,8 +30,9 @@
       @handleSizeChange="handleSizeChange"
       @handleCurrentChange="handleCurrentChange"
     />
-    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible">
-      <RoleDialog />
+
+    <el-dialog title="新增菜单" :visible.sync="dialogTableVisible" width="37vw">
+      <MenuDialog />
     </el-dialog>
   </div>
 </template>
@@ -27,54 +41,46 @@
 import TableComponent from '@/components/tableComponents/tableComponent.vue';
 import Pagination from '@/components/tableComponents/pagination.vue';
 import ControlBtn from '@/components/tableComponents/controlBtn.vue';
-import RoleDialog from './roleDialog';
+import MenuDialog from './menuDialog';
 import { request } from '@/network/require';
 import { funList } from '@/util/publicFun';
+
 export default {
-  name: 'RoleManage',
+  name: 'MenuMenage',
   components: {
     TableComponent,
     Pagination,
     ControlBtn,
-    RoleDialog
+    MenuDialog
   },
   data() {
     return {
-      total: 3,
+      treeProp: {
+        children: 'children',
+        hasChildren: 'hasChildren'
+      },
+      activeName: '',
+      total: 4,
       pageSize: 10,
       currentPage: 1,
       layout: 'total,sizes,prev,pager,next,jumper',
       showBackground: true,
-      baseConfig: {
-        searchConfig: {},
-        tableConfig: {
-          tableData: [], //  表格数据
-          tableColumn: [], // 表格表头配置信息
-          showColumnBtn: true, // 是否展示表格操作栏
-          columnBtnList: [], // 操作栏按钮列表
-          showCheckbox: false // 是否展示复选框
-        },
-        paginationConfig: {
-          currentPage: 1, // 当前页
-          pageSize: 10, // 每页显示多少条
-          total: 0 // 总数
-        }
-      },
+      isExpandTable: true,
       tableData: [],
       columnData: [
         {
-          propName: 'name',
-          label: '姓名',
+          propName: 'otherName',
+          label: '菜单名称',
           showActionBar: false
         },
         {
-          propName: 'createTime',
-          label: '创建时间',
+          propName: 'path',
+          label: '访问路径',
           showActionBar: false
         },
         {
-          propName: 'createName',
-          label: '创建人',
+          propName: 'filePath',
+          label: '文件位置',
           showActionBar: false
         }
       ],
@@ -84,11 +90,11 @@ export default {
         label: '操作',
         actionBarList: [
           {
-            name: '查看权限',
+            name: '查看',
             type: 'view'
           },
           {
-            name: '编辑权限',
+            name: '编辑',
             type: 'edit'
           },
           {
@@ -97,6 +103,7 @@ export default {
           }
         ]
       },
+      showCheckbox: false,
       controlBtn: [
         {
           name: '新增',
@@ -350,14 +357,25 @@ export default {
         //   ]
         // }
       ],
-      dialogVisible: false,
-      dialogTitle: '新增角色'
+      systemList: [],
+      expandRowKeys: [],
+      dialogTableVisible: false
     };
   },
   mounted() {
     this.getTableData();
   },
   methods: {
+    // 按钮点击事件
+    btnClick(data) {
+      if (data.name === '新增') {
+        this.dialogTableVisible = true;
+      }
+    },
+    // 行点击事件
+    rowClick(row) {
+      console.log(row);
+    },
     // 搜索表格数
     search() {
       this.getTableData();
@@ -366,32 +384,35 @@ export default {
     getTableData() {
       const sendData = {
         method: 'get',
-        url: '/powerManage/getRoleList'
+        url: '/powerManage/menuList',
+        data: {
+          systemId: 1
+        }
       };
       request(sendData).then(res => {
+        // const data = [];
+        // funList.formatRouter(res, data);
         this.tableData = res;
+        console.log('列表数据', res);
       });
     },
     // 按钮点击事件合集
     btnClickEvent(data) {
       console.log(data);
       switch (data.type) {
-        case 'view' : this.viewData(data); break;
-        case 'edit' : this.editData(data); break;
-        case 'delete' : this['delete'](data); break;
+        case 'view' : this.viewData(data.data); break;
+        case 'edit' : this.editData(data.data); break;
+        case 'delete' : this['delete'](data.data); break;
       }
     },
     // 查看功能
     viewData(data) {
       funList.alertMessage('success', '查看功能');
-      this.dialogTitle = '查看角色权限';
       console.log('处理查看功能', data);
     },
     // 编辑功能
     editData(data) {
-      // funList.alertMessage('warning', '编辑功能');
-      this.dialogTitle = '编辑角色权限';
-      this.dialogVisible = true;
+      funList.alertMessage('warning', '编辑功能');
       console.log('处理编辑功能', data);
     },
     // 删除功能
@@ -416,5 +437,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-  @import "../../css/pageCommon";
+  @import "../../../css/pageCommon";
 </style>

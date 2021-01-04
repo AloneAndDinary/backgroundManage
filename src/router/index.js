@@ -22,10 +22,10 @@ const baseRoutes = [
     name: 'welcome',
     component: Layout,
     meta: { canLogin: false },
-    redirect: '/welcome/index',
+    redirect: '/welcome',
     children: [
       {
-        path: '/welcome/index',
+        path: '/welcome',
         name: 'welcomeIndex',
         component: () => import('@/views/welcome.vue'),
         meta: { canLogin: false }
@@ -35,7 +35,8 @@ const baseRoutes = [
 ];
 
 const router = new VueRouter({
-  base: '/cms/',
+  mode: 'history',
+  // base: '/cms/',
   routes: baseRoutes
 });
 

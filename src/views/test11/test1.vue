@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasePage :base-config="baseConfig"/>
+    <BasePage :base-config="baseConfig" />
   </div>
 </template>
 

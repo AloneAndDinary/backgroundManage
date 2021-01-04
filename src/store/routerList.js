@@ -49,7 +49,7 @@ function formatRouter(data, route) {
         item.component = Level;
         item.children.push(router);
       } else {
-        router.component = () => import('@/views' + router.path + '.vue');
+        router.component = () => import('@/views' + router.filePath + '.vue');
         item.children.push(router);
       }
     }

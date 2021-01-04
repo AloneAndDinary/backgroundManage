@@ -387,5 +387,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-  @import "../../css/pageCommon";
+  @import "../../../css/pageCommon";
 </style>
