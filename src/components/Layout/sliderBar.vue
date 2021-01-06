@@ -40,6 +40,7 @@ export default {
     })
   },
   mounted() {
+    console.log('顺序2');
     if (typeof this.asyncRouter === 'string') {
       this.routerList = JSON.parse(this.asyncRouter);
     } else {
