@@ -374,7 +374,6 @@ export default {
     },
     // 行点击事件
     rowClick(row) {
-      console.log(row);
     },
     // 搜索表格数
     search() {
@@ -393,12 +392,10 @@ export default {
         // const data = [];
         // funList.formatRouter(res, data);
         this.tableData = res;
-        console.log('列表数据', res);
       });
     },
     // 按钮点击事件合集
     btnClickEvent(data) {
-      console.log(data);
       switch (data.type) {
         case 'view' : this.viewData(data.data); break;
         case 'edit' : this.editData(data.data); break;
@@ -408,19 +405,16 @@ export default {
     // 查看功能
     viewData(data) {
       funList.alertMessage('success', '查看功能');
-      console.log('处理查看功能', data);
     },
     // 编辑功能
     editData(data) {
       funList.alertMessage('warning', '编辑功能');
-      console.log('处理编辑功能', data);
     },
     // 删除功能
     delete(data) {
       funList.confirmDialog(() => {
         funList.alertMessage('error', '删除功能');
       }, '您确定要删除该数据吗？');
-      console.log('处理删除功能', data);
     },
     // 分页页数切换
     handleSizeChange(size) {
@@ -437,5 +431,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-  @import "../../css/pageCommon";
+  @import "../../../css/pageCommon";
 </style>

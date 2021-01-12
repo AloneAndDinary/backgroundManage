@@ -1,9 +1,9 @@
 import router from '../router';
-import { setLocalItem, getLocalItem } from '@/util/commonUtil';
+import { setSessionItem, getSessionItem } from '@/util/commonUtil';
 const commonState = {
   state: {
-    openMenuList: getLocalItem('openMenuList') ? JSON.parse(getLocalItem('openMenuList')) : [],
-    activeIndex: getLocalItem('activeIndex') ? getLocalItem('activeIndex') : 0
+    openMenuList: getSessionItem('openMenuList') ? JSON.parse(getSessionItem('openMenuList')) : [],
+    activeIndex: getSessionItem('activeIndex') ? getSessionItem('activeIndex') : 0
   },
   mutations: {
     // 设置面包屑导航添加一项 同步设置当前激活菜单下标
@@ -19,7 +19,7 @@ const commonState = {
         router.push(menu.path);
       } else {
         state.openMenuList.push(menu);
-        setLocalItem('openMenuList', JSON.stringify(state.openMenuList));
+        setSessionItem('openMenuList', JSON.stringify(state.openMenuList));
         this.commit('SET_ACTIVEINDEX', state.openMenuList.length - 1);
       }
     },
@@ -28,7 +28,7 @@ const commonState = {
       state.openMenuList = state.openMenuList.filter((item) => {
         return item.path !== data.path;
       });
-      setLocalItem('openMenuList', JSON.stringify(state.openMenuList.filter((item) => {
+      setSessionItem('openMenuList', JSON.stringify(state.openMenuList.filter((item) => {
         return item.path !== data.path;
       })));
       if (state.openMenuList.length === 0) {
@@ -48,7 +48,7 @@ const commonState = {
     // 设置面包屑当前激活菜单下标
     SET_ACTIVEINDEX(state, index) {
       state.activeIndex = index;
-      setLocalItem('activeIndex', index);
+      setSessionItem('activeIndex', index);
     }
   },
   actions: {}

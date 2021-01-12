@@ -4,10 +4,20 @@
       <controlBtn :search-item-list="searchItemList" :control-btn="controlBtn" :show-search-btn="showSearchBtn" />
     </div>
     <div class="tableContent">
-      <tableComponent :table-data="tableData" :column-data="columnData" :show-checkbox="showCheckbox" :show-btn="showBtn" :btn-list="btnList" />
+      <tableComponent
+        :table-data="tableConfig.tableData"
+        :column-data="tableConfig.tableColumn"
+        :show-checkbox="tableConfig.showCheckbox"
+        :show-btn="tableConfig.showColumnBtn"
+        :btn-list="tableConfig.columnBtnList"
+      />
     </div>
     <div class="paginationContent">
-      <pagination :current-page="currentPage" :page-size="pageSize" :total="total" />
+      <pagination
+        :current-page="paginationConfig.currentPage"
+        :page-size="paginationConfig.pageSize"
+        :total="paginationConfig.total"
+      />
     </div>
   </div>
 </template>
@@ -24,40 +34,65 @@ export default {
     controlBtn
   },
   props: {
-    currentPage: {
-      type: Number,
-      default: 1
-    },
-    pageSize: {
-      type: Number,
-      default: 10
-    },
-    total: {
-      type: Number,
-      default: 0
+    baseConfig: {
+      type: Object,
+      default() {
+        return {
+          searchConfig: {},
+          tableConfig: {
+            tableData: [], //  表格数据
+            tableColumn: [], // 表格表头配置信息
+            showColumnBtn: true, // 是否展示表格操作栏
+            columnBtnList: {
+              label: '操作',
+              actionBarList: []
+            }, // 操作栏按钮列表
+            showCheckbox: false // 是否展示复选框
+          },
+          paginationConfig: {
+            currentPage: 1, // 当前页
+            pageSize: 10, // 每页显示多少条
+            total: 0 // 总数
+          }
+        };
+      }
     }
   },
   data() {
     return {
-      btnList: true,
-      showBtn: false,
-      showCheckbox: false,
-      columnData: [],
-      tableData: {},
+      // btnList: true,
+      // showBtn: false,
+      // showCheckbox: false,
+      // columnData: [],
+      // tableData: {},
       controlBtn: [],
       searchItemList: [],
       showSearchBtn: false
     };
   },
+  computed: {
+    searchConfig() {
+      return this.baseConfig.searchConfig;
+    },
+    tableConfig() {
+      return this.baseConfig.tableConfig;
+    },
+    paginationConfig() {
+      return this.baseConfig.paginationConfig;
+    }
+  },
+  mounted() {
+  },
   methods: {
     handleSizeChange(val) {
-      console.log(val);
       this.$emit('handleSizeChange', val);
     }
   }
 };
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .container{
+    margin-top: 10px;
+  }
 </style>

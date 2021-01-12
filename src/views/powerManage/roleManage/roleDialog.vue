@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { request } from '../../network/require';
+import { request } from '../../../network/require';
 import PanelComponent from './paneComponent';
 export default {
   name: 'RoleDialog',
@@ -37,7 +37,6 @@ export default {
       };
       request(sendData).then(res => {
         this.menuList = res;
-        console.log('列表数据', res);
       });
     },
     // 标签切换

@@ -17,6 +17,9 @@
       @handleSizeChange="handleSizeChange"
       @handleCurrentChange="handleCurrentChange"
     />
+    <el-dialog :title="dialogTitle" :visible.sync="dialogVisible">
+      <RoleDialog />
+    </el-dialog>
   </div>
 </template>
 
@@ -24,22 +27,39 @@
 import TableComponent from '@/components/tableComponents/tableComponent.vue';
 import Pagination from '@/components/tableComponents/pagination.vue';
 import ControlBtn from '@/components/tableComponents/controlBtn.vue';
+import RoleDialog from './roleDialog';
 import { request } from '@/network/require';
 import { funList } from '@/util/publicFun';
 export default {
-  name: 'UserManage',
+  name: 'RoleManage',
   components: {
     TableComponent,
     Pagination,
-    ControlBtn
+    ControlBtn,
+    RoleDialog
   },
   data() {
     return {
-      total: 4,
+      total: 3,
       pageSize: 10,
       currentPage: 1,
       layout: 'total,sizes,prev,pager,next,jumper',
       showBackground: true,
+      baseConfig: {
+        searchConfig: {},
+        tableConfig: {
+          tableData: [], //  表格数据
+          tableColumn: [], // 表格表头配置信息
+          showColumnBtn: true, // 是否展示表格操作栏
+          columnBtnList: [], // 操作栏按钮列表
+          showCheckbox: false // 是否展示复选框
+        },
+        paginationConfig: {
+          currentPage: 1, // 当前页
+          pageSize: 10, // 每页显示多少条
+          total: 0 // 总数
+        }
+      },
       tableData: [],
       columnData: [
         {
@@ -48,13 +68,13 @@ export default {
           showActionBar: false
         },
         {
-          propName: 'gender',
-          label: '性别',
+          propName: 'createTime',
+          label: '创建时间',
           showActionBar: false
         },
         {
-          propName: 'role',
-          label: '角色',
+          propName: 'createName',
+          label: '创建人',
           showActionBar: false
         }
       ],
@@ -64,7 +84,11 @@ export default {
         label: '操作',
         actionBarList: [
           {
-            name: '编辑',
+            name: '查看权限',
+            type: 'view'
+          },
+          {
+            name: '编辑权限',
             type: 'edit'
           },
           {
@@ -325,7 +349,9 @@ export default {
         //     }
         //   ]
         // }
-      ]
+      ],
+      dialogVisible: false,
+      dialogTitle: '新增角色'
     };
   },
   mounted() {
@@ -340,7 +366,7 @@ export default {
     getTableData() {
       const sendData = {
         method: 'get',
-        url: '/powerManage/getUserList'
+        url: '/powerManage/getRoleList'
       };
       request(sendData).then(res => {
         this.tableData = res;
@@ -348,29 +374,28 @@ export default {
     },
     // 按钮点击事件合集
     btnClickEvent(data) {
-      console.log(data);
       switch (data.type) {
-        case 'view' : this.viewData(); break;
-        case 'edit' : this.editData(); break;
-        case 'delete' : this['delete'](); break;
+        case 'view' : this.viewData(data); break;
+        case 'edit' : this.editData(data); break;
+        case 'delete' : this['delete'](data); break;
       }
     },
     // 查看功能
     viewData(data) {
       funList.alertMessage('success', '查看功能');
-      console.log('处理查看功能', data);
+      this.dialogTitle = '查看角色权限';
     },
     // 编辑功能
     editData(data) {
-      funList.alertMessage('warning', '编辑功能');
-      console.log('处理编辑功能', data);
+      // funList.alertMessage('warning', '编辑功能');
+      this.dialogTitle = '编辑角色权限';
+      this.dialogVisible = true;
     },
     // 删除功能
     delete(data) {
       funList.confirmDialog(() => {
         funList.alertMessage('error', '删除功能');
       }, '您确定要删除该数据吗？');
-      console.log('处理删除功能', data);
     },
     // 分页页数切换
     handleSizeChange(size) {
@@ -387,5 +412,5 @@ export default {
 </script>
 
 <style scoped lang="less">
-  @import "../../css/pageCommon";
+  @import "../../../css/pageCommon";
 </style>

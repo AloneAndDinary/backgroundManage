@@ -1,17 +1,17 @@
-import { setLocalItem, getLocalItem } from '@/util/commonUtil';
+import { setSessionItem, getSessionItem } from '@/util/commonUtil';
 import { request } from '@/network/require';
 import Layout from '@/components/Layout';
 // import router from '@/router';
 import Level from '@/components/Layout/levelComponent';
 const commonState = {
   state: {
-    asyncRouter: getLocalItem('asyncRouter') ? JSON.parse(getLocalItem('asyncRouter')) : []
+    asyncRouter: getSessionItem('asyncRouter') ? JSON.parse(getSessionItem('asyncRouter')) : []
   },
   mutations: {
     // 设置路由
     SET_ASYNCROUTER(state, data) {
       state.asyncRouter = JSON.stringify(data);
-      setLocalItem('asyncRouter', JSON.stringify(data));
+      setSessionItem('asyncRouter', JSON.stringify(data));
     }
   },
   actions: {
@@ -49,7 +49,7 @@ function formatRouter(data, route) {
         item.component = Level;
         item.children.push(router);
       } else {
-        router.component = () => import('@/views' + router.path + '.vue');
+        router.component = () => import('@/views' + router.filePath + '.vue');
         item.children.push(router);
       }
     }

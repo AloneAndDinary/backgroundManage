@@ -11,6 +11,12 @@ const baseRoutes = [
     meta: { canLogin: false }
   },
   {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/login.vue'),
+    meta: { canLogin: false }
+  },
+  {
     path: '/',
     name: 'homeIndex',
     component: Layout,
@@ -22,10 +28,10 @@ const baseRoutes = [
     name: 'welcome',
     component: Layout,
     meta: { canLogin: false },
-    redirect: '/welcome/index',
+    redirect: '/welcome',
     children: [
       {
-        path: '/welcome/index',
+        path: '/welcome',
         name: 'welcomeIndex',
         component: () => import('@/views/welcome.vue'),
         meta: { canLogin: false }
@@ -35,18 +41,22 @@ const baseRoutes = [
 ];
 
 const router = new VueRouter({
-  base: '/cms/',
+  mode: 'history',
+  // base: '/cms/',
   routes: baseRoutes
 });
 
 // 获取动态路由
 store.dispatch('getAsyncRouter').then(res => {
+  console.log('顺序1');
   router.addRoutes(res);
   store.commit('SET_ASYNCROUTER', res);
 });
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
+  console.log('来源', to);
+  console.log('去往', from);
   if (to.matched.some(record => record.meta.canLogin)) {
     // console.log('需要登录');
     // 判断是否登录，若未登录跳转至登录页，若已登录则继续

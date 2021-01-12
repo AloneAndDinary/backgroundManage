@@ -8,7 +8,6 @@
 export default {
   name: 'Home',
   mounted() {
-    console.log('配置的数据', process.env.baseUrl);
   }
 };
 </script>
